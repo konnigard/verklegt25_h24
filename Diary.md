@@ -77,3 +77,19 @@ Samskipti:
 
 Gefa feedback:
 1. Segja við mig strax.
+
+<h3> Þórður Miguel </h3>
+Work Condition:
+Vill vinna á stað helst
+Get unnið heima
+Ef ég er með heyrnatól í mér má pikka í mig
+
+Tími:
+Hvaða tími sem er virkar, frekar til í að mæta nær hádeigi samt
+
+Samskipti:
+Lýkar við að mæta á stað til að vinna með restinni af hópnum
+Ef eitthver klikkun á sér stað útaf mér, vill helst að sé sagt við mig strax
+
+Gefa feedback:
+1.Hreinsklini og og fá allt skýrt.
