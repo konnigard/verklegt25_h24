@@ -49,4 +49,16 @@ Samskipti:
 Gefa feedback:
 1. Seiga við mig strax.
 
+<h3> Klara Lind </h3>
+Work Condition:
+1. Er í Háskólanámi með vinnu (er í fæðingarorlofi) þannig vil helst vinna remote. En get mætt í HR þegar ég get
+2. Vil vinna hratt og nýta tímann vel, er frekar busy in daily life, þannig þarf að geta unnið á skilvirkan hátt
 
+Tími:
+1. Er laus frá 9 - 16 til 30.nóv Frá 1.des er ég að byrja aftur í dagvinnunni minni. Get þá mestmegnis unnið á kvöldin. Eða stolist að vinna smá og smá í dagvinnunni minni. 
+
+Samskipti: 
+1. Jákvæð samskipti :)
+
+Gefa feedback:
+1. Má segja hlutina beint við mig, en á góðan hátt
