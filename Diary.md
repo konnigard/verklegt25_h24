@@ -93,3 +93,12 @@ Ef eitthver klikkun á sér stað útaf mér, vill helst að sé sagt við mig s
 
 Gefa feedback:
 1.Hreinsklini og og fá allt skýrt.
+
+<h3> Hvað var gert í dag? </h3>
+Sett var upp git repository og bætt var inn Þorbjörn í hópinn. Allir voru til staðar. Klara og Þorbjörn voru á discord og rest tilstaða í Sólinni.
+
+Hákon tók að sér að setja upp git og búa til git handbók. Allir kláruðu að filla inn í spurningarnar gefnar á glærunum.
+
+Ákveðið var að ræða mættingu og annað á morgun þegar allir verða til staða í HR.
+
+<h1> Dagur 2 25/11/2025 </h1>
