@@ -16,6 +16,21 @@ Samskifti:
 Gefa feedback:
 1. Seiga við mig strax rólega.
 
+<h3> Þorbjörn Óskar Arnmundsson </h3>
+
+Work Condition:
+1. Væri mjög gott að geta gert eitthverja daga remote sparar hellings tíma fyrir mig að þurfa ekki að ferðast.
+2. Get alltaf komið uppí skóla þegar við viljum hittast svo lengi sem ég heyri með smá fyrirvara.
+
+Tími:
+1. breytir litlu hvaða tíma dags unnið er.
+2. Er með vinnu föstudagana 28/11 12/12.
+
+Samskifti: 
+1. Beint pm á discord, eða @ inná group chattið væri besta leiðinni til að hafa samband við mig.
+
+Gefa feedback:
+1. Endilega bara senda á mig þegar hentar við.
 
 
 
