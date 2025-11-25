@@ -129,7 +129,7 @@ Hópurinn kyntist og fengu tylfiningu fyrir hvort annað. Við kláruðum að fi
 
 <h3> ToDo: </h3>
 
-Git Handbók ( )
+Git Handbók (x)
 
 User Case ( )
 
