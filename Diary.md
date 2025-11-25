@@ -1,4 +1,4 @@
-<h1> Dagur 1 24/11/2025 </h1>
+<h1> Dagur 1 - 24/11/2025 </h1>
 
 <h3> Hákon Garðar </h3>
 Work Condition:
@@ -101,4 +101,42 @@ Hákon tók að sér að setja upp git og búa til git handbók. Allir kláruðu
 
 Ákveðið var að ræða mættingu og annað á morgun þegar allir verða til staða í HR.
 
-<h1> Dagur 2 25/11/2025 </h1>
+<h1> Dagur 2 - 25/11/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel
+
+Guðrún
+
+Hákon
+
+Þórður
+
+Þorbjörn(Remote)
+
+
+<h3> Staða verkefnis: </h3>
+
+Eins og stendur er verið að byrja á hönnunninni í dag. Flestir í teyminnu eru að setja atthygli sína í það.
+Hákon er að vinna á Git handbókinni sem hann ætlar að klára áður en hann hopar yfir í hönnunnina með restinni. Hann áætlar að klára það í dag.
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Hópurinn kyntist og fengu tylfiningu fyrir hvort annað. Við kláruðum að finna hvaða tími virkar fyrir okkur og plannað er að hittast klukkan 10:00 á hverjum morgni og vera til 18:00 ef svo þarf.
+
+
+<h3> ToDo: </h3>
+
+Git Handbók ( )
+
+User Case ( )
+
+Use Case ( )
+
+Layer Hönnun ( )
+
+
+
+<h1> Dagur 3 - 26/11/2025 </h1>
