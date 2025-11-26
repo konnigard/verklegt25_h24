@@ -129,7 +129,7 @@ Hópurinn kyntist og fengu tylfiningu fyrir hvort annað. Við kláruðum að fi
 
 <h3> ToDo: </h3>
 
-Git Handbók (x)
+Git Handbók ( )
 
 User Case ( )
 
@@ -140,3 +140,39 @@ Layer Hönnun ( )
 
 
 <h1> Dagur 3 - 26/11/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel
+
+Guðrún
+
+Hákon
+
+Þórður
+
+Þorbjörn
+
+
+<h3> Staða verkefnis: </h3>
+
+Komið er afstað Use Case og Class Diagram, ásamt kröfulista. Eftir á að sameina það í skjal og byrja á Happy Paths.
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Byrjað var á hönnunar skjalinu ásamt Use Case og Class Diagrams. Git Handbókin er 90% tilbúin og vantar einungis að setja forsíðu og klára dæmi um sameiningar árekstur.
+
+
+
+<h3> ToDo: </h3>
+
+Git Handbók ( )
+
+User Case ( )
+
+Use Case ( )
+
+Layer Hönnun ( )
+
+Happy Paths ( )
