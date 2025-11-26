@@ -1,0 +1,9 @@
+Sjá
+
+1) Sjá Lið
+2) Sjá Klúbb
+3) Sjá Leikmann
+4) Sjá Viðburð
+
+b) til baka
+q) Hætta

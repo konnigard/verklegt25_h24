@@ -1,0 +1,6 @@
+Heimaskjar
+
+1) Skrá
+2) Sjá
+
+q) Hætta
