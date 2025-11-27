@@ -1,6 +1,10 @@
-Skraning Lida
+Skrá Lið
 
 Nafn Liðs:
 Leikur Liðs: 
 Klúbur Liðs:
 Fjöldi Leikmanna: 
+
+Staðfesta skráningu liðs (j/n):
+
+
