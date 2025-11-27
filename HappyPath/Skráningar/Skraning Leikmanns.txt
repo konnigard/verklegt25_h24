@@ -1,11 +1,12 @@
-Skraning Leikmanns
+Skrá Leikmann
 
 Nafn Leikmans:
-Fæðingardagur:
+Fæðingardagur (YYYY-MM-DD):
 Heimilisfang:
 Símanúmer:
 Netfang:
 Tengil:
 Notendanafn:
-Klúbbur:
-Lið:
+
+Staðfesta skráningu (j/n) :
+
