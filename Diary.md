@@ -176,3 +176,47 @@ Use Case ( )
 Layer Hönnun ( )
 
 Happy Paths ( )
+
+
+<h1> Dagur 4 - 27/11/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel(Remote)
+
+Guðrún(Remote)
+
+Hákon(Remote)
+
+Þórður(Remote)
+
+Þorbjörn(Remote)
+
+
+<h3> Staða verkefnis: </h3>
+
+Meiri hluti af hönnunnini er kominn og var unnið í að sameina það í eitt skjal fyrir skil. 
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Unnið var að Fá happy path í gang og að fá Use Cases í A og B kröfur. Einnig var klárað notendagreiningu og Class Diagram.
+
+
+<h3> ToDo: </h3>
+
+Kröfulisti (x)
+
+Use cases(x)
+
+Happy Paths (x) 
+
+Class diagrams ()
+
+State diagrams ()
+
+Notendagreining (x)
+
+UI-Design (x)
+
+Git Handbók (x)
