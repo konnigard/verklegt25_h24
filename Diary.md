@@ -220,3 +220,49 @@ Notendagreining (x)
 UI-Design (x)
 
 Git Handbók (x)
+
+
+
+
+<h1> Dagur 6 - 1/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel
+
+Guðrún
+
+Hákon
+
+Þórður(Remote)
+
+Þorbjörn(Remote)
+
+
+<h3> Staða verkefnis: </h3>
+
+Þarf að laga Class Diagram og breyta því í 3ja layer design 
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Klárað var seintasta skjalið og skilað því inn en 
+
+
+<h3> ToDo: </h3>
+
+Kröfulisti (x)
+
+Use cases(x)
+
+Happy Paths (x) 
+
+Class diagrams ()
+
+State diagrams ()
+
+Notendagreining (x)
+
+UI-Design (x)
+
+Git Handbók (x)
