@@ -6,5 +6,8 @@ class teamUI:
 
     def createTeam(teamName, club, teammembers):
         teamLst = []
-        teamLst.appent(teamName; club; teammembers)
+        teamLst.appent(teamName, club, teammembers)
+        for item in teamLst:
+            comToSemi = item.replace(",", ";")
+            teamLst.append(comToSemi)
         return teamLst
