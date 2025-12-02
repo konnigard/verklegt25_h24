@@ -1,4 +1,10 @@
-#from file imports function
-from teamData import readTeams
+#from file imports class
+from DataLayer.teamData import Data
 
-readTeams = readTeams()
+class Wrapper:
+    def __init__(self):
+        pass
+    
+    def readTeams():
+        Teams = Data.readTeams()
+        return Teams
