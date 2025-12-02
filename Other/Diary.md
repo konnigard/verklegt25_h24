@@ -266,3 +266,42 @@ Notendagreining (x)
 UI-Design (x)
 
 Git Handbók (x)
+
+
+
+<h1> Dagur 6 - 1/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel (Remote)
+
+Hákon
+
+Þórður(Remote)
+
+Þorbjörn(Remote)
+
+
+<h3> Staða verkefnis: </h3>
+
+Grunn hönnun er búinn og byrjað er á fortun. 
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Lagað var þryggja laga hönnun class diagram og búið til beinagrind fyrir classanna. 
+
+
+<h3> ToDo: </h3>
+
+Main Menu ()
+
+Team Database ()
+
+Player Class ()
+
+Team Class ()
+
+Event Class ()
+
+Tournament Class ()
