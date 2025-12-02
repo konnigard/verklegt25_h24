@@ -275,7 +275,9 @@ Git Handbók (x)
 
 Axel (Remote)
 
-Hákon
+Guðrún (Remote)
+
+Hákon (Skóli)
 
 Þórður(Remote)
 
