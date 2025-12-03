@@ -1,10 +1,10 @@
-from LogicLayer.logicLayerAPI import logicWrapper
-from UILayer.teamUIClass import teamUI
+from LogicLayer.logicLayerAPI import LogicWrapper
+from UILayer.teamUIClass import TeamUI
 
 
 class MainUI:
     def __init__(self):
-        self.logicWrapper = logicWrapper()
+        self.LogicWrapper = LogicWrapper()
 
-        self.teamUI = teamUI(self.logicWrapper)
+        self.TeamUI = TeamUI(self.LogicWrapper)
 

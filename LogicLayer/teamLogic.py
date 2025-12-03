@@ -2,8 +2,8 @@
 from DataLayer.dataLayerAPI import Wrapper
 
 class teamLogic:
-    def __init__():
-        pass
+    def __init__(self, Wrapper):
+        self.Wrapper = Wrapper
 
     def validateTeamCreation():
         """ Atthugar til að sjá hvort lið sé til núþegar """
