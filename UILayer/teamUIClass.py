@@ -1,12 +1,9 @@
 #from file import class
-from LogicLayer.logicLayerAPI import logicWrapper
+from LogicLayer.logicLayerAPI import LogicWrapper
 
-class teamUI:
-    def __init__(self, logicWrapper):
-        self.logicWrapper = logicWrapper
-        self.teamName = input("Please Enter the Team Name: ")
-        self.club = input("Please Enter the Team's Club: ")
-        self.teammembers = input("Please Enter the number of players in the team: ")
+class TeamUI:
+    def __init__(self):
+        self.LogicWrapper = LogicWrapper()
 
     def createTeam(self, teamName, club, teammembers): #Defines the function
         teamLst = [] #Empty list to place all the information
@@ -16,11 +13,6 @@ class teamUI:
             teamLst.append(comToSemi)
         return teamLst #Returns a correctly formated filled list
     
-    def printTeamInfo(self):
-        teamName = self.logicWrapper.getTeamInfo.team[0]
-        teamClub = self.logicWrapper.getTeamInfo.team[1]
-        teammembers = self.logicWrapper.getTeamInfo.team[2]
-
-        print(teamName)
-        print(teamClub)
-        print(teammembers)
+    def showTeam(self):
+        showTeam = self.LogicWrapper.sendTeamInfoToUI()
+        return showTeam

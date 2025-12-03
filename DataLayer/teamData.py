@@ -1,20 +1,20 @@
 import csv
 
-
-class Data:
-    def __init__():
+class TeamData:
+    def __init__(self):
         pass
     
     def writeTeams():
-        """ Skrifar inn team á CSV skjalið """
+        """ Registers the team to the CSV """
 
 
-    def readTeams():
-        """ Skoðar CSV til að sjá liðið """
+    def readTeams(self):
+        """ Reads the CSV to find the teams """
 
         with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase: #Opens the file 
             cvsDB = csv.reader(dataBase, delimiter= ';')
             for info in cvsDB: #Returns line per line in csv
                 return info
 
-        #name, club, players
+            #name, club, players
+

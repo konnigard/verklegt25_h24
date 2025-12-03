@@ -1,14 +1,17 @@
-from LogicLayer.logicLayerAPI import logicWrapper
-from UILayer.teamUIClass import teamUI
+from UILayer.teamUIClass import TeamUI
 
-from UILayer.mainUI import MainUI
+class Test:
+    def __init__(self):
+        self.TeamUI = TeamUI()
 
-# test = teamUI.printTeamInfo()
+    def printTeam(self):
+        paper = self.TeamUI.showTeam()
+        return paper
+    
 
-mainUI = MainUI()
+classPrint = Test()
+printer = classPrint.printTeam()
 
-teamUI = mainUI.teamUI
-
-
-
-teamUI.printTeamInfo
+print(printer[0])
+print(printer[1])
+print(printer[2])

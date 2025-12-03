@@ -1,10 +1,11 @@
 #from file imports class
-from DataLayer.teamData import Data
+from DataLayer.teamData import TeamData
 
-class Wrapper:
-    def __init__(self, Data):
-        self.Data = Data
+class DataWrapper:
+    def __init__(self):
+        self.TeamData = TeamData()
     
-    def readTeams():
-        Teams = Data.readTeams()
-        return Teams
+    def sendToLogic(self): #Takes what readTeams returns and sends it to logic layer 
+        teamList = self.TeamData.readTeams()
+        return teamList
+    
