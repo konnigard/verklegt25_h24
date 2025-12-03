@@ -269,7 +269,7 @@ Git Handbók (x)
 
 
 
-<h1> Dagur 6 - 1/12/2025 </h1>
+<h1> Dagur 7 - 2/12/2025 </h1>
 
 <h3> Mæting: </h3> 
 
@@ -307,3 +307,41 @@ Team Class ()
 Event Class ()
 
 Tournament Class ()
+
+
+<h1> Dagur 7 - 3/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel 
+
+Guðrún 
+
+Hákon 
+
+Þórður(Remote)
+
+Þorbjörn(Remote)
+
+
+<h3> Staða verkefnis: </h3>
+
+Hænsnaskref í að byrja að forrita. 
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Byrjað var að forrita og er allt byrjað að myndast.
+
+
+<h3> ToDo: </h3>
+
+Main Menu () - Þorbjörn
+
+Player Class () - Axel og Guðrún
+
+Team Class () - Hákon
+
+Event Class ()
+
+Tournament Class () - Þórður
