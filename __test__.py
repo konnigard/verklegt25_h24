@@ -8,10 +8,3 @@ class Test:
         paper = self.TeamUI.showTeam()
         return paper
     
-
-classPrint = Test()
-printer = classPrint.printTeam()
-
-print(printer[0])
-print(printer[1])
-print(printer[2])
