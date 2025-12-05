@@ -1,10 +1,10 @@
 import csv
 
-class TeamData:
+class ReadTeamData:
     def __init__(self):
         pass
     
-    def writeTeams():
+    def writeTeams(self):
         """ Registers the team to the CSV """
 
 

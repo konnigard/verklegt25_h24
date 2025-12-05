@@ -1,5 +1,5 @@
 from LogicLayer.logicLayerAPI import LogicWrapper
-from UILayer.teamUIClass import TeamUI
+from UILayer.readTeamUIClass import TeamUI
 
 
 class MainUI:
