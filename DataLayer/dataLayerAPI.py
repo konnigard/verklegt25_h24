@@ -1,5 +1,5 @@
 #from file imports class
-from DataLayer.TeamData import ReadTeamData
+from DataLayer.readTeamData import ReadTeamData
 
 class DataWrapper:
     def __init__(self):
