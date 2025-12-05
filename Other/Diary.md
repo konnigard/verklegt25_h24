@@ -379,3 +379,44 @@ Team Class () - Hákon
 Event Class ()
 
 Tournament Class () - Þórður
+
+
+
+<h1> Dagur 10 - 5/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel (Remote)
+
+Guðrún
+
+Hákon 
+
+Þórður(Remote)
+
+Þorbjörn(Remote)
+
+
+<h3> Staða verkefnis: </h3>
+
+hægt er að lesa úr skjali hjá teymum og er verið að vinna í að klára allan lestur.
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Unnið var í að lesa klúbba, eventa og að koma eitthverju sem gleymdist að gera í GitHub á Gitið
+
+
+<h3> ToDo: </h3>
+
+Main Menu ()
+
+Team Database ()
+
+Player Class ()
+
+Team Class ()
+
+Event Class ()
+
+Tournament Class ()
