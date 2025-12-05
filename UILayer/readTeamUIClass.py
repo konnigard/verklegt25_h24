@@ -1,7 +1,7 @@
 #from file import class
 from LogicLayer.logicLayerAPI import LogicWrapper
 
-class TeamUI:
+class TeamUIRead:
     def __init__(self):
         self.LogicWrapper = LogicWrapper()
 
