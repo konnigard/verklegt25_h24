@@ -9,8 +9,13 @@ class TeamLogicClass:
 
     def validateTeamCreation(self):
         """ Checks to see if team already exists """
-        readTeam = self.DataWrapper.sendToLogic()
-        newTeam = self.LogicWrapper.sendFromUIToLogic()
+        readTeam = self.DataWrapper.sendToLogic() #Grabs from the DataWrapper
+        newTeam = self.LogicWrapper.sendFromUIToLogic() #Grabs from the LogicWrapper
+        
+        if readTeam[0] == newTeam[0]:
+            return "This Team already Exists"
+        else:
+            return newTeam
 
 
     def grabTeamData(self):
