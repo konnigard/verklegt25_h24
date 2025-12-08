@@ -15,7 +15,7 @@ class TeamData:
         #return 
 
 
-    def readTeams(self): 
+    def readAllTeams(self) -> list[Team]: 
         """ Reads the CSV to find the teams """
         
         teamList = []
@@ -30,4 +30,13 @@ class TeamData:
             
         return teamList
     #name, club, players
+
+    def checksTeamName(self):
+        teamNameList = []
+        with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase:
+            csvDB = csv.reader(dataBase, delimiter= ';')
+
+            for row in csvDB:
+                teamNameList.append(row[0]).upper()
+        return teamNameList
 

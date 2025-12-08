@@ -1,16 +1,30 @@
 #from file imports class
 from DataLayer.teamData import TeamData
+from Models.teamModel import Team
 
 class DataWrapper:
     def __init__(self):
         self.TeamData = TeamData()
     
-    def sendToLogic(self): #Takes what readTeams returns and sends it to logic layer 
-        teamList = self.TeamData.readTeams()
+####  Functions for Teams  ##################################
+    def loadAllTeams(self) -> list[Team]:
+        '''Returns all teams or empty list if no teams exist''' 
+        teamList = self.TeamData.readAllTeams() 
         return teamList
     
-    def sendToData(self):
-        from LogicLayer.TeamLogic import TeamLogicClass
-        newTeamToData = TeamLogicClass.writeNewTeam()
-        return newTeamToData
+    def LoadTeamByID(self, teamID ) -> Team:
+        t : Team = Team("smuu", "Plee")
+        return t
     
+    def writeNewTeam(self, team: Team) -> bool:
+        print("write new team ran")
+        return True
+
+    def updateTeam(self, team: Team) -> bool: 
+        print("update Team Ran")
+        return True
+##############################################################
+
+####  Functions for Players  ##################################
+
+##############################################################
