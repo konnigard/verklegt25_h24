@@ -10,7 +10,7 @@ class DataWrapper:
         return teamList
     
     def sendToData(self):
-        from LogicLayer.readTeamLogic import TeamLogicClass
+        from LogicLayer.TeamLogic import TeamLogicClass
         newTeamToData = TeamLogicClass.writeNewTeam()
         return newTeamToData
     

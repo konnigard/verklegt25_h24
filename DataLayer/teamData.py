@@ -8,11 +8,11 @@ class TeamData:
     #def writeTeams(self):
         #""" Registers the team to the CSV """
 
-        #rom DataLayer.dataLayerAPI import DataWrapper
+        #from DataLayer.dataLayerAPI import DataWrapper
         #with open('datalayer/repository/TeamDB', mode= 'w') as dataBase: #Opens file in write
           #  toBeWritten = DataWrapper.sendToData() #Input from user
          #   cvsWritter = csv.writer(toBeWritten)
-        #return "Team Created"
+        #return 
 
 
     def readTeams(self): 

@@ -1,8 +1,11 @@
 from UILayer.playerUIClass import playerUI
+from UILayer.teamUIClass import TeamUI
 
 
 def show_see_menu(ui: playerUI) -> bool:
     """'See' menu – returns False if user wants to quit."""
+
+    uiTeam = TeamUI()
     while True:
         print("\nSee")
         print("1) See Teams")
@@ -16,7 +19,7 @@ def show_see_menu(ui: playerUI) -> bool:
         choice = input("Choose action: ").strip().lower()
 
         if choice == "1":
-            print("[See Teams] not implemented yet")
+            uiTeam.teamMenu()
         elif choice == "2":
             print("[See Clubs] not implemented yet")
         elif choice == "3":
