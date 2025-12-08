@@ -4,11 +4,8 @@ import os
 
 class Tournament_Data:
     def __init__(self):
-        self.file_name = "TournamentsDB.cvs"
+        self.file_name = "TournamentsDB.csv"
     
-      
-      
-      
     def readTournaments(self):
         """ Reads the CSV to find the tournaments """
         filepath = os.path.abspath(__file__)
@@ -22,6 +19,3 @@ class Tournament_Data:
 if __name__ == "__main__":
     handler = Tournament_Data()
     handler.readTournaments()
-
-    
-

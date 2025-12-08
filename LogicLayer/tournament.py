@@ -21,6 +21,3 @@ class Tournament:
         self.teams = teams 
         self.games = games 
         
-if __name__ == "__main__":
-    tournamentA = Tournament("ogre",date.today(),date.today(), "pyongyang","Kim","kim@fret","69696969")
-    print (tournamentA.start_date)
