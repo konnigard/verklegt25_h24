@@ -10,6 +10,6 @@ class Test:
     
 tester = Test()
 paper = tester.printTeam()
-print(paper[0])
-print(paper[1])
-print(paper[2])
+for team in paper:
+    print(team)
+    print(team.teamName)

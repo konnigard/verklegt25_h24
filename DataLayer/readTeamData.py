@@ -1,4 +1,5 @@
 import csv
+from Models.teamModel import Team
 
 class ReadTeamData:
     def __init__(self):
@@ -10,11 +11,17 @@ class ReadTeamData:
 
     def readTeams(self): 
         """ Reads the CSV to find the teams """
-
+        
+        teamList = []
         with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase: #Opens the file 
             cvsDB = csv.reader(dataBase, delimiter= ';')
+        
             for info in cvsDB: #Returns line per line in csv
-                return info
-
-            #name, club, players
+                teamName = info[0]
+                teamClub = info[1]
+                readTeam = Team(teamName, teamClub)
+                teamList.append(readTeam)
+            
+        return teamList
+    #name, club, players
 
