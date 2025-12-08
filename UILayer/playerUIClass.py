@@ -1,11 +1,11 @@
 from datetime import datetime
-from playerModel import Player
-from LogicLayer.logicLayerAPI import LogicLayerAPI
+from Models.playerModel import Player
+from LogicLayer.logicLayerAPI import LogicWrapper
 
 
 class playerUI:
     def __init__(self) -> None:
-        self.logic = LogicLayerAPI()
+        self.logic = LogicWrapper()
 
     def player_menu(self) -> None:
         while True:
