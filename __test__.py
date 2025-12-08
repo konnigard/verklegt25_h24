@@ -1,15 +1,12 @@
-from UILayer.readTeamUIClass import TeamUIRead
+from LogicLayer.logicLayerAPI import LogicWrapper
 
 class Test:
     def __init__(self):
-        self.TeamUI = TeamUIRead()
+        self.currentClass = LogicWrapper()
 
     def printTeam(self):
-        paper = self.TeamUI.showTeam()
+        paper = self.currentClass.sendFromUItoLogic()
         return paper
     
 tester = Test()
 paper = tester.printTeam()
-for team in paper:
-    print(team)
-    print(team.teamName)

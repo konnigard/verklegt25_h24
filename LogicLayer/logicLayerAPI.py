@@ -10,7 +10,7 @@ class LogicWrapper:
         return listOfTeam
     
     def sendFromUItoLogic(self):
-        from UILayer.readTeamUIClass import TeamUIRead
-        newTeam = TeamUIRead.createTeam()
+        from UILayer.teamUIClass import TeamUI
+        newTeam = TeamUI.createTeam()
         return newTeam
     

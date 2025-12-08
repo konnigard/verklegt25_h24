@@ -2,7 +2,7 @@
 from DataLayer.dataLayerAPI import DataWrapper
 
 
-class TeamLogicClassRead:
+class TeamLogicClass:
     def __init__(self):
         self.DataWrapper = DataWrapper()  
 
@@ -13,4 +13,6 @@ class TeamLogicClassRead:
         return readTeams
     
     def writeNewTeam(self):
-        pass
+        from LogicLayer.logicLayerAPI import logicWrapper
+        newTeam = logicWrapper.sendFromUIToLogic()
+        return newTeam
