@@ -12,14 +12,28 @@ class TeamUI:
     
     def showTeam(self):
         showTeam = self.LogicWrapper.sendTeamInfoToUI()
-        return showTeam
+        while True:
+            print(showTeam)
+            print()
+            print("b) Back")
+            print("q) Quit")
+            choice = input("Choose action: ").strip().upper()
+
+            if choice == "B":
+                break
+            elif choice == "Q":
+                quit()
+            else:
+                print("Invalid choice, try again.")
     
     def teamMenu(self):
         while True:
             print("\n===== TEAM MENU =====")
             print("1 Register new team")
             print("2 Show teams")
-            print("B Back")
+            print()
+            print("b) Back")
+            print("q) Quit")
             choice = input("Choose action: ").strip().upper()
 
             if choice == "1":
@@ -28,5 +42,7 @@ class TeamUI:
                 self.showTeam()
             elif choice == "B":
                 break
+            elif choice =="Q":
+                quit()
             else:
                 print("Invalid choice, try again.")

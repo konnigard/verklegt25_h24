@@ -80,7 +80,7 @@ def main() -> None:
         print("1 See details")
         print("2 Register")
         print("************************")
-        print("Q Quit")
+        print("q) Quit")
         print("************************")
         choice = input("Choose action: ").strip().upper()
 

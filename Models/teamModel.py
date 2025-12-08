@@ -7,4 +7,4 @@ class Team:
         self.teammates: list[Player] = []
 
     def __repr__(self):
-        return f"Team(teamName= {self.teamName}, teamClub= {self.teamClub})"
+        return f"Team Name: {self.teamName}\nClub: {self.teamClub})"
