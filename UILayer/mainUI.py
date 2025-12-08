@@ -2,7 +2,7 @@ import os
 import sys
 
 class MainUI:
-    """MainMenuUI"""
+    """Main menu interface"""
     
     def __init__(self, logic_layer):
         self.Logic_layer = logic_layer
@@ -25,7 +25,7 @@ class MainUI:
         while True:
             try:
                 if allow_back:
-                    user_input = input(f"{prompt} (q) Hætta: ").strip()
+                    user_input = input(f"{prompt} (q) Quit: ").strip()
                     if user_input.lower() == "q":
                         return None
                 else:
@@ -34,28 +34,27 @@ class MainUI:
                     return int(user_input)
                 elif input_type == str:
                     if not user_input:
-                        print("Villa! intak má ekki vera tómt.")
+                        print("Error! input cannot be blank")
                         continue
                     return user_input
                 else:
                     return input_type(user_input)
             except ValueError:
-                print(f"Villa ógilt inntak tegund. Búist var við {input_type.__name__}.")
+                print(f"Error invalid input. Expected input was {input_type.__name__}.")
     
     def show_home_menu(self):
         """Displays the main menu"""
         while True:
-            self.display_header("Heimaskjár")
-            print("1) skrá")
-            print("2) sjá")
-            print("3) stjórnandaðgangur")
+            self.display_header("Home Screen")
+            print("1) see details")
+            print("2) Register ")
+            print("3) Admin acess")
             print()
-            print("q) hætta")
+            print("q) Quit")
             print()
 
-            choice = self.get_input("veldu valkost", allow_back=False)
+            choice = self.get_input("Choose option", allow_back=False)
 
-            #TODO change the switchboard to relevent Menus
             if choice == "1":
                 self.show_register_menu()
             elif choice == "2":
@@ -63,8 +62,8 @@ class MainUI:
             elif choice == "3":
                 self.show_admin_menu()
             elif choice and choice.lower() == "q":
-                print("\nÞakka þér fyrir notkun!")
+                print("\nThank you for the use!")
                 sys.exit(0)
             else:
-                print("ógildur Valkostur. Vinsamlega sláðu inn 1-3 eða q til að hætta")
-                input("Ýttu á Enter til að halda áfram...")
+                print("Invalid choice, please press a number from 1-3 or q to quit!")
+                input("Press Enter to continue")
