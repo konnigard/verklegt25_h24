@@ -11,7 +11,8 @@ class TeamData:
         from DataLayer.dataLayerAPI import DataWrapper
         with open('datalayer/repository/TeamDB', mode= 'w') as dataBase: #Opens file in write
             toBeWritten = DataWrapper.sendToData() #Input from user
-            cvsWritter = csv.writer(dataBase, delimiter= ';')
+            cvsWritter = csv.writer(toBeWritten)
+        return "Team Created"
 
 
     def readTeams(self): 
