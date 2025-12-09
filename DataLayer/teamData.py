@@ -5,8 +5,11 @@ class TeamData:
     def __init__(self):
         pass
     
-    def saveNewTeam(self):
-        pass
+    def saveNewTeam(self, newTeam: Team):
+        with open('datalayer/repository/TeamDB.csv', mode='a', newline='') as dataBase:
+            csvWriter = csv.writer(dataBase, delimiter=';')
+            # teamlist is now a string, write it directly
+            csvWriter.writerow([newTeam.teamID, newTeam.teamName, newTeam.teamClub])
 
     def readAllTeams(self) -> list[Team]: 
         """ Reads the CSV to find the teams """
