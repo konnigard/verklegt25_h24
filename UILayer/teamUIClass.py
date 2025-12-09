@@ -31,14 +31,17 @@ class TeamUI:
         while True:
             print(showTeam) #prints the team
             print()
+            print("1) Add Player")
             print("b) Back")
             print("q) Quit")
 
             #User input
             choice = input("Choose action: ").strip().upper() 
-
+            
+            if choice == "1":
+                self.addPlayerMenu()
             #Goes back to the previous screen
-            if choice == "B": 
+            elif choice == "B": 
                 break
             #Quits the program
             elif choice == "Q": 
@@ -77,3 +80,6 @@ class TeamUI:
             #Lovely error messsage
             else:
                 print("Invalid choice, try again.")
+
+    def addPlayerMenu(self):
+        print("AddPlayer Menu Ran")

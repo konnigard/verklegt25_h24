@@ -23,9 +23,10 @@ class TeamData:
 
             #Returns line per line in csv
             for info in cvsDB: 
-                teamName = info[0]
-                teamClub = info[1]
-                readTeam = Team(teamName, teamClub)
+                teamID = info[0]
+                teamName = info[1]
+                teamClub = info[2]
+                readTeam = Team(teamID, teamName, teamClub)
                 teamList.append(readTeam)
             
         return teamList

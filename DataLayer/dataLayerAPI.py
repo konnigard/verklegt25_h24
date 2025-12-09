@@ -17,7 +17,7 @@ class DataWrapper:
 ####  Functions for Teams  ##################################
     def loadAllTeams(self) -> list[Team]:
         '''Returns all teams or empty list if no teams exist''' 
-        teamList = self.TeamData.readAllTeams() 
+        return self.TeamData.readAllTeams() 
 
     def sendToLogic(self): #Takes what readTeams returns and sends it to logic layer
         teamList = self.TeamData.readTeams()
