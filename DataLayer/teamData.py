@@ -31,7 +31,7 @@ class TeamData:
         return teamList
     #name, club, players
 
-    def checksTeamID(self) -> list:
+    def checksTeamID(self) -> list[Team]:
         teamIDList = []
         with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase:
             csvDB = csv.reader(dataBase, delimiter= ';')

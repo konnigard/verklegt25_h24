@@ -39,10 +39,10 @@ class DataWrapper:
     def writePlayer(self, player: Player):
         return self.PlayerData.savePlayer(player)
     
-    def readTeam(self) -> list:
+    def readTeam(self) -> list[Team]:
         return self.PlayerData.loadPlayer()
     
-    def loadPlayerByUsername(self, username: Player) -> list:
+    def loadPlayerByUsername(self, username: Player) -> list[Team]:
         return self.PlayerData.loadPlayerByUsername(username)
 
 ##############################################################
