@@ -31,12 +31,12 @@ class TeamData:
         return teamList
     #name, club, players
 
-    def checksTeamName(self):
-        teamNameList = []
+    def checksTeamID(self):
+        teamIDList = []
         with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase:
             csvDB = csv.reader(dataBase, delimiter= ';')
 
             for row in csvDB:
-                teamNameList.append(row[1]).upper()
-        return teamNameList
+                teamIDList.append(row[0])
+        return teamIDList
 

@@ -33,3 +33,12 @@ class PlayerData:
             pass
 
         return playerList
+    
+    def loadPlayerByUsername(self):
+        usernameList = []
+        with open('datalayer/repository/PlayerDB.csv', mode= 'r') as dataBase:
+            csvDB = csv.reader(dataBase, delimiter= ';')
+
+            for row in csvDB:
+                usernameList.append(row[6])
+        return usernameList

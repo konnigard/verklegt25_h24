@@ -24,8 +24,7 @@ class DataWrapper:
         return teamList
     
     def LoadTeamByID(self, teamID ) -> Team:
-        t : Team = Team("smuu", "Plee")
-        return t
+        return self.TeamData.checksTeamID()
     
     def writeNewTeam(self, team: Team) -> bool:
         print("write new team ran")
@@ -42,6 +41,9 @@ class DataWrapper:
     
     def readTeam(self) -> list:
         return self.PlayerData.loadPlayer()
+    
+    def loadPlayerByUsername(self, username: Player) -> bool:
+        return self.PlayerData.loadPlayerByUsername()
 
 ##############################################################
 
