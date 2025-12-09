@@ -2,14 +2,17 @@
 from DataLayer.clubData import ClubData
 from DataLayer.teamData import TeamData
 from DataLayer.playerData import PlayerData
+from DataLayer.tournamentData import TournamentData
 from Models.teamModel import Team
 from Models.playerModel import Player
+from Models.tournamentModel import Tournament
 
 class DataWrapper:
     def __init__(self):
         self.TeamData = TeamData()
         self.ClubData = ClubData()
         self.PlayerData = PlayerData()
+        self.TournamentData = TournamentData()
     
 ####  Functions for Teams  ##################################
     def loadAllTeams(self) -> list[Team]:
@@ -51,3 +54,11 @@ class DataWrapper:
         self.ClubData.writeClub(club)
     
 ##############################################################    
+
+####  Functions for Tournaments  #############################
+    def readTournaments(self):
+        return self.TournamentData.loadTournament()
+    
+    def writeTournaments(self, tournament: Tournament):
+        return self.TournamentData.saveTournament(tournament)
+##############################################################
