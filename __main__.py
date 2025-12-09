@@ -1,11 +1,14 @@
 from UILayer.playerUIClass import playerUI
 from UILayer.teamUIClass import TeamUI
+from UILayer.clubUIClass import ClubUI
+from UILayer.clubUIClass import ClubUI
 
 
 def show_see_menu(ui: playerUI) -> bool:
-    """'See' menu – returns False if user wants to quit."""
+    """'See' menu - returns False if user wants to quit."""
 
     uiTeam = TeamUI()
+    uiClub = ClubUI()
     while True:
         print("\nSee")
         print("1) See Teams")
@@ -21,7 +24,7 @@ def show_see_menu(ui: playerUI) -> bool:
         if choice == "1":
             uiTeam.teamMenu()
         elif choice == "2":
-            print("[See Clubs] not implemented yet")
+            uiClub.showClubs()
         elif choice == "3":
             ui.show_players()
         elif choice == "4":
@@ -36,6 +39,7 @@ def show_see_menu(ui: playerUI) -> bool:
 
 def show_register_menu(ui: playerUI) -> bool:
     """'Register' menu returns False if user wants to quit."""
+    uiClub = ClubUI()
     while True:
         print("\nRegister")
         print("1) Register player")
@@ -61,7 +65,7 @@ def show_register_menu(ui: playerUI) -> bool:
         elif choice == "5":
             print("[Create schedule] not implemented yet")
         elif choice == "6":
-            print("[Register club] not implemented yet")
+            uiClub.createClub()
         elif choice == "b":
             return True   # go back to main menu
         elif choice == "q":
