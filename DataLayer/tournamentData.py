@@ -33,3 +33,12 @@ class TournamentData:
                 tourList.append(readTeam)
             
         return tourList
+    
+    def loadTournamentByName(self) -> list:
+        tourNameList = []
+        with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase:
+            csvDB = csv.reader(dataBase, delimiter= ';')
+
+            for row in csvDB:
+                tourNameList.append(row[0])
+        return tourNameList

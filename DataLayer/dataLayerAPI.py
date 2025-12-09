@@ -42,8 +42,8 @@ class DataWrapper:
     def readTeam(self) -> list:
         return self.PlayerData.loadPlayer()
     
-    def loadPlayerByUsername(self, username: Player) -> bool:
-        return self.PlayerData.loadPlayerByUsername()
+    def loadPlayerByUsername(self, username: Player) -> list:
+        return self.PlayerData.loadPlayerByUsername(username)
 
 ##############################################################
 
@@ -63,4 +63,7 @@ class DataWrapper:
     
     def writeTournaments(self, tournament: Tournament):
         return self.TournamentData.saveTournament(tournament)
+    
+    def loadTournamentByName(self, name: Tournament) -> list:
+        return self.TournamentData.loadTournamentByName(name)
 ##############################################################
