@@ -2,7 +2,6 @@
 from DataLayer.clubData import ClubData
 from DataLayer.teamData import TeamData
 from Models.teamModel import Team
-from DataLayer.clubData import ClubData
 
 class DataWrapper:
     def __init__(self):
@@ -35,6 +34,8 @@ class DataWrapper:
 
 ##############################################################
 
+####  Functions for Clubs  ##################################
+
     def sendToData(self):
         from LogicLayer.TeamLogic import TeamLogicClass
         newTeamToData = TeamLogicClass.writeNewTeam()
@@ -47,3 +48,4 @@ class DataWrapper:
     def saveClubToData(self, club):
         self.ClubData.writeClub(club)
     
+##############################################################    
