@@ -18,7 +18,17 @@ class TeamLogicClass:
     def validateAndAddNewTeam(self, newTeam: Team) :
         """ Checks to see if the team exist already """
         # 1) Check if all fileds are valid 
-        
+        while True:
+            if Team.validateTeamID(newTeam.teamID) == True:
+                if Team.validateTeamName(newTeam.teamName) == True:
+                    if Team.validateTeamClub(newTeam.teamClub) == True:
+                        break
+                    else:
+                        return "Team Club is invalid, Regestration Failed"
+                else:
+                    return "Team Name is invalid, Regestration Failed"
+            else:
+                return "Team ID is invalid, Regestration Failed"
         # 2) check if all uniqe things are uniqe 
         #   - This will require reading all teams from file
         allTeams: list[Team]= self.datawrapper.loadAllTeams()
