@@ -11,7 +11,7 @@ class PlayerData:
             # teamlist is now a string, write it directly
             csvWriter.writerow([player.name, player.dob, player.address, player.phone_number, player.email, player.link, player.username])  
 
-    def loadPlayer(self, player: Player):
+    def loadPlayer(self) -> list[Player]:
         playerList = []
         try:
             with open('datalayer/repository/PlayersDB.csv', mode='r') as dataBase:
