@@ -82,4 +82,5 @@ class TeamUI:
                 print("Invalid choice, try again.")
 
     def addPlayerMenu(self):
-        print("AddPlayer Menu Ran")
+        username = input("Please enter the username of the player you wish to add: ")
+        self.LogicWrapper.comparePlayerUsername(username)

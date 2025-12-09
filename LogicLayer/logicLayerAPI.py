@@ -15,6 +15,9 @@ class LogicWrapper:
 
     def addNewTeam(self, newTeam):
         return self.teamLogic.validateAndAddNewTeam(newTeam)
+    
+    def comparePlayerInfo(self, username):
+        return self.teamLogic.compareUsernameToPlayerList(username)
 ###############################################################
 
 ####  Functions for Players  ##################################

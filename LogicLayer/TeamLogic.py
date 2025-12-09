@@ -33,3 +33,6 @@ class TeamLogicClass:
         #   - if not can we fix it or do we need to raise an exception to pas to the UI
         
         return self.writeNewTeam
+    
+    def compareUsernameToPlayerList(self, username, teamID):
+        pass

@@ -26,7 +26,8 @@ class TeamData:
                 teamID = info[0]
                 teamName = info[1]
                 teamClub = info[2]
-                readTeam = Team(teamID, teamName, teamClub)
+                teammates = info[3]
+                readTeam = Team(teamID, teamName, teamClub, teammates)
                 teamList.append(readTeam)
             
         return teamList
