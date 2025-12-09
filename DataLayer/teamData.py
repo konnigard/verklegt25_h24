@@ -5,15 +5,8 @@ class TeamData:
     def __init__(self):
         pass
     
-    #def writeTeams(self):
-        #""" Registers the team to the CSV """
-
-        #from DataLayer.dataLayerAPI import DataWrapper
-        #with open('datalayer/repository/TeamDB', mode= 'w') as dataBase: #Opens file in write
-          #  toBeWritten = DataWrapper.sendToData() #Input from user
-         #   cvsWritter = csv.writer(toBeWritten)
-        #return 
-
+    def saveNewTeam(self):
+        pass
 
     def readAllTeams(self) -> list[Team]: 
         """ Reads the CSV to find the teams """
