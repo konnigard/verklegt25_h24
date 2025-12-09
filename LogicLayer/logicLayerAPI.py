@@ -7,7 +7,6 @@ class LogicWrapper:
     def __init__(self):
         datawrapper = DataWrapper()
         self.teamLogic = TeamLogicClass( datawrapper )
-        # Only once instance of the wrapper, sent in to the logic classes
         self.clubLogic = ClubLogicClass()
 
 ####  Functions for Teams  #####################################

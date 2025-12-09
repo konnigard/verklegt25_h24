@@ -21,10 +21,10 @@ class TeamLogicClass:
         
         # 2) check if all uniqe things are uniqe 
         #   - This will require reading all teams from file
-        #allTeams: list[Team]= self.datawrapper.loadAllTeams()
-        #for team in allTeams :
-         #   if team.teamName.upper() == newTeam.teamName.upper():
-          #      return "Team name already Exists"
+        allTeams: list[Team]= self.datawrapper.loadAllTeams()
+        for team in allTeams :
+            if team.teamName.upper() == newTeam.teamName.upper():
+                return "Team name already Exists"
            #     # Here we should deal with the fact the name is not UNIQE
             # if team.X == newTeam.X   # Some other check to do ??
             
