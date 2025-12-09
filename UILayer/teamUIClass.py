@@ -8,12 +8,14 @@ class TeamUI:
 
     def createTeam(self): #Defines the function
         """ Creates new team through input from user """
-        
-        print("\n Regester New Team") #New line beacause the menu should be :sparkels: pretty :sparkels:
 
+        #New line beacause the menu should be :sparkels: pretty :sparkels:
+        print("\n Regester New Team") 
+
+        teamID = input("Team ID: ") #Number Identifier for the team
         teamName = input("Team Name: ") #Input for the team name
         club = input("Club: ") #Input for club
-        newTeam: Team = Team(teamName, club) #Fills in the information through the model class
+        newTeam: Team = Team(teamID, teamName, club) #Fills in the information through the model class
         validation = self.LogicWrapper.addNewTeam(newTeam)
         
         return validation #returns the reasult of Validation
