@@ -10,13 +10,13 @@ def show_see_menu(ui: playerUI) -> bool:
     uiClub = ClubUI()
     while True:
         print("\nSee")
-        print("1) See Teams")
-        print("2) See Clubs")
-        print("3) See Players")
-        print("4) See Events")
+        print("1) Sjá Lið")
+        print("2) Sjá Klubb")
+        print("3) Sjá Leikmenn")
+        print("4) Sjá Viðburði")
         print()
-        print("b) Back")
-        print("q) Quit")
+        print("b) Til baka")
+        print("q) Hætta")
 
         choice = input("Choose action: ").strip().lower()
 
@@ -41,12 +41,12 @@ def show_register_menu(ui: playerUI) -> bool:
     uiClub = ClubUI()
     while True:
         print("\nRegister")
-        print("1) Register player")
-        print("2) Register team")
-        print("3) Register tournament")
-        print("4) Register match result")
-        print("5) Create schedule")
-        print("6) Register club")
+        print("1) Skrá Leikmann")
+        print("2) Skrá team")
+        print("3) Skrá mót")
+        print("4) Skrá niðurstöðu leiks")
+        print("5) búa til dagskrá")
+        print("6) Skrá Klúbb")
         print()
         print("b) Back")
         print("q) Quit")
@@ -78,12 +78,12 @@ def main() -> None:
 
     while True:
         print("************************")
-        print("        MAIN MENU")
+        print("        Upphafsskjár")
         print("************************")
-        print("1 See details")
-        print("2 Register")
+        print("1 Skoða ")
+        print("2 Skrá")
         print("************************")
-        print("q) Quit")
+        print("q) Hætta")
         print("************************")
         choice = input("Choose action: ").strip().upper()
 
@@ -99,7 +99,7 @@ def main() -> None:
             print("Bye!")
             break
         else:
-            print("Invalid choice, try again.\n")
+            print("Rangt val, Vinsamlegast prufaðu annað \n")
 
 
 if __name__ == "__main__":
