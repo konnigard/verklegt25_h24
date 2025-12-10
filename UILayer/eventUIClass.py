@@ -34,6 +34,7 @@ class EventUI:
         """Main event menu"""
         while True:
             print("\n===== EVENT MENU =====")
+            print()
             print("1) Create new event")
             print("2) View all events")
             print("3) View events by tournament")
@@ -139,6 +140,7 @@ class EventUI:
 
         # Show summary and confirm
         print("\nConfirm event creation:")
+        print()
         print(f"  Event ID:     {eventID}")
         print(f"  Tournament:   {selected_tournament.name}")
         print(f"  Match:        {teamHome} vs {teamAway}")

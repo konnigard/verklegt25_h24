@@ -10,6 +10,7 @@ class ClubUI:
     def createClub(self):
         """ Creates a new club by collecting user input """
         print("\n===== REGISTER NEW CLUB =====")
+        print()
         clubname = input("Please enter the Clubname: ").strip()
         teamlist = input("Please enter the Teamlist (comma-separated, or leave blank): ").strip()
         hometown = input("Please enter the Hometown: ").strip()
@@ -27,6 +28,7 @@ class ClubUI:
         """ Displays detailed information about a specific club """
         while True:
             print("\n===== CLUB DETAILS =====")
+            print()
             print(f"Club name: {club.clubname}")
             print(f"Hometown:  {club.hometown}")
             print(f"Country:   {club.country}")
