@@ -8,14 +8,14 @@ class ClubUI:
 
     def createClub(self):
         """ Creates a new club by collecting user input """
-        print("\n===== REGISTER NEW CLUB =====")
-        clubname = input("Please enter the Clubname: ").strip()
-        teamlist = input("Please enter the Teamlist (comma-separated, or leave blank): ").strip()
-        hometown = input("Please enter the Hometown: ").strip()
-        country = input("Please enter the Country: ").strip()
+        print("\n===== Ská nýjan klúbb =====")
+        clubname = input("Skráðu inn nafn klúbbs: ").strip()
+        teamlist = input("Skráðu inn lið (comma-separated, or leave blank): ").strip()
+        hometown = input("Settu inn Heimabæ liðs (heimilisfang: ").strip()
+        country = input("Skráu inn land: ").strip()
 
         if not clubname or not hometown or not country:
-            print("Error: Clubname, Hometown, and Country are required!")
+            print("Villa kom upp vinsamlegast skrá inn: Klúbbanafn, Heimabæ liðs og land !")
             return
 
         newClub = Club(clubname, hometown, country, teamlist)
@@ -25,12 +25,12 @@ class ClubUI:
     def showClubDetails(self, club: Club):
         """ Displays detailed information about a specific club """
         while True:
-            print("\n===== CLUB DETAILS =====")
+            print("\n===== UPPLÝSINGAR UM KLÚBB =====")
             print(club)
             print()
             print("b) Back")
             print("q) Quit")
-            choice = input("Choose action: ").strip().upper()
+            choice = input("Veldu aðgerð: ").strip().upper()
 
             if choice == "B":
                 break
@@ -44,9 +44,9 @@ class ClubUI:
         clubList = self.LogicWrapper.sendClubInfoToUI()
 
         while True:
-            print("\n===== REGISTERED CLUBS =====")
+            print("\n===== SKRÁ KLÚBB =====")
             if not clubList:
-                print("No clubs registered yet.")
+                print("Enginn klúbbur skráður enþá.")
             else:
                 for idx, club in enumerate(clubList, start=1):
                     print(f"{idx}. {club.clubname}")
@@ -54,7 +54,7 @@ class ClubUI:
             print()
             print("b) Back")
             print("q) Quit")
-            choice = input("Choose action: ").strip().upper()
+            choice = input("Veldu aðgerð: ").strip().upper()
 
             if choice == "B":
                 break
@@ -72,13 +72,13 @@ class ClubUI:
     def clubMenu(self):
         """ Main menu for club operations """
         while True:
-            print("\n===== CLUB MENU =====")
-            print("1 Register new club")
-            print("2 Show clubs")
+            print("\n===== Club MENU =====")
+            print("1 Skrá nýjan klúbb")
+            print("2 Skoða klúbb")
             print()
             print("b) Back")
             print("q) Quit")
-            choice = input("Choose action: ").strip().upper()
+            choice = input("Veldu aðgerð: ").strip().upper()
 
             if choice == "1":
                 self.createClub()
