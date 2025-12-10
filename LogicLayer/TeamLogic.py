@@ -35,4 +35,7 @@ class TeamLogicClass:
         return self.writeNewTeam
     
     def compareUsernameToPlayerList(self, username, teamID):
+        #1) Check the team to see if player already exists
+        #2) Checks if the player with that user name exists
+        #3) Add to Team
         pass
