@@ -1,5 +1,92 @@
-class clubUI:
+#from file import class
+from Models.clubModel import Club
+from LogicLayer.logicLayerAPI import LogicWrapper
+
+class ClubUI:
     def __init__(self):
-        self.name = input("Please enter the name of the Club: ")
-        self.hometown = input("Please enter the home town of the club: ")
-        self.country = input("Please enter the country the club originates: ")
+        self.LogicWrapper = LogicWrapper()
+
+    def createClub(self):
+        """ Creates a new club by collecting user input """
+        print("\n===== Ská nýjan klúbb =====")
+        clubname = input("Skráðu inn nafn klúbbs: ").strip()
+        teamlist = input("Skráðu inn lið (comma-separated, or leave blank): ").strip()
+        hometown = input("Settu inn Heimabæ liðs (heimilisfang: ").strip()
+        country = input("Skráu inn land: ").strip()
+
+        if not clubname or not hometown or not country:
+            print("Villa kom upp vinsamlegast skrá inn: Klúbbanafn, Heimabæ liðs og land !")
+            return
+
+        newClub = Club(clubname, hometown, country, teamlist)
+        self.LogicWrapper.saveClubFromUI(newClub)
+        print(f"\nClub '{clubname}' has been successfully registered!")
+
+    def showClubDetails(self, club: Club):
+        """ Displays detailed information about a specific club """
+        while True:
+            print("\n===== UPPLÝSINGAR UM KLÚBB =====")
+            print(club)
+            print()
+            print("b) Back")
+            print("q) Quit")
+            choice = input("Veldu aðgerð: ").strip().upper()
+
+            if choice == "B":
+                break
+            elif choice == "Q":
+                quit()
+            else:
+                print("Invalid choice, try again.")
+
+    def showClubs(self):
+        """ Displays all registered clubs """
+        clubList = self.LogicWrapper.sendClubInfoToUI()
+
+        while True:
+            print("\n===== SKRÁ KLÚBB =====")
+            if not clubList:
+                print("Enginn klúbbur skráður enþá.")
+            else:
+                for idx, club in enumerate(clubList, start=1):
+                    print(f"{idx}. {club.clubname}")
+
+            print()
+            print("b) Back")
+            print("q) Quit")
+            choice = input("Veldu aðgerð: ").strip().upper()
+
+            if choice == "B":
+                break
+            elif choice == "Q":
+                quit()
+            elif choice.isdigit():
+                club_number = int(choice)
+                if 1 <= club_number <= len(clubList):
+                    self.showClubDetails(clubList[club_number - 1])
+                else:
+                    print(f"Invalid club number. Please choose between 1 and {len(clubList)}.")
+            else:
+                print("Invalid choice, try again.")
+
+    def clubMenu(self):
+        """ Main menu for club operations """
+        while True:
+            print("\n===== Club MENU =====")
+            print("1 Skrá nýjan klúbb")
+            print("2 Skoða klúbb")
+            print()
+            print("b) Back")
+            print("q) Quit")
+            choice = input("Veldu aðgerð: ").strip().upper()
+
+            if choice == "1":
+                self.createClub()
+            elif choice == "2":
+                self.showClubs()
+            elif choice == "B":
+                break
+            elif choice == "Q":
+                quit()
+            else:
+                print("Invalid choice, try again.")
