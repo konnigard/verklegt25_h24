@@ -43,6 +43,10 @@ class LogicWrapper:
         """Updates an existing team through the logic layer"""
         self.teamLogic.updateTeam(team)
 
+    def is_team_name_available(self, teamName: str) -> bool:
+        """Checks if a team name is available (not already taken)"""
+        return self.teamLogic.isTeamNameAvailable(teamName)
+
     def sendPlayerInfoToUI(self):
         """Makes the player data accessible to the UI"""
         listOfPlayers = self.playerLogic.grabPlayerData()
@@ -66,9 +70,9 @@ class LogicWrapper:
         """Placeholder for recording match results - not yet implemented"""
         print("Match result recording not yet implemented")
 
-    def create_event(self, eventID, tournamentName, teamHome, teamAway, eventDate, eventTime, location, status="scheduled"):
-        """Creates a new event by saving it through the logic layer"""
-        event = self.eventLogic.createEventFromData(eventID, tournamentName, teamHome, teamAway, eventDate, eventTime, location, status)
+    def create_event(self, tournamentName, teamHome, teamAway, eventDate, eventTime, location, status="scheduled"):
+        """Creates a new event by saving it through the logic layer (EventID will be auto-generated)"""
+        event = self.eventLogic.createEventFromData(tournamentName, teamHome, teamAway, eventDate, eventTime, location, status)
         self.eventLogic.saveNewEvent(event)
 
     def get_all_events(self):
@@ -97,6 +101,10 @@ class LogicWrapper:
         """Gets all players for a specific team"""
         return self.playerLogic.grabPlayersByTeam(teamName)
 
+    def is_username_available(self, username: str) -> bool:
+        """Checks if a username is available (not already taken)"""
+        return self.playerLogic.isUsernameAvailable(username)
+
     def register_team_for_tournament(self, tournamentName: str, teamName: str):
         """Registers a team for a tournament"""
         self.tournamentTeamLogic.registerTeam(tournamentName, teamName)
@@ -116,3 +124,7 @@ class LogicWrapper:
     def unregister_team_from_tournament(self, tournamentName: str, teamName: str):
         """Removes a team's registration from a tournament"""
         self.tournamentTeamLogic.unregisterTeam(tournamentName, teamName)
+
+    def has_team_tournament_date_conflict(self, tournamentName: str, teamName: str) -> bool:
+        """Checks if a team has a date conflict with the specified tournament"""
+        return self.tournamentTeamLogic.hasDateConflict(tournamentName, teamName)

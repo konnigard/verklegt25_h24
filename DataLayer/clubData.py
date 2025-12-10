@@ -9,8 +9,7 @@ class ClubData:
         """ Registers a club to the CSV """
         with open('DataLayer/repository/ClubDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
-            # teamlist is now a string, write it directly
-            csvWriter.writerow([club.clubname, club.teamlist, club.hometown, club.country])
+            csvWriter.writerow([club.clubname, club.hometown, club.country])
 
     def readClubs(self) -> list[Club]:
         """ Reads the CSV to find all clubs """
@@ -20,12 +19,19 @@ class ClubData:
                 csvDB = csv.reader(dataBase, delimiter=';')
 
                 for info in csvDB:
-                    if len(info) >= 4:  # Ensure we have all required fields
+                    if len(info) >= 4:
+                        # Old format: clubname;teamlist;hometown;country (skip teamlist)
                         clubname = info[0]
-                        teamlist = info[1]
                         hometown = info[2]
                         country = info[3]
-                        readClub = Club(clubname, hometown, country, teamlist)
+                        readClub = Club(clubname, hometown, country)
+                        clubList.append(readClub)
+                    elif len(info) >= 3:
+                        # New format: clubname;hometown;country
+                        clubname = info[0]
+                        hometown = info[1]
+                        country = info[2]
+                        readClub = Club(clubname, hometown, country)
                         clubList.append(readClub)
         except FileNotFoundError:
             # If file doesn't exist, return empty list

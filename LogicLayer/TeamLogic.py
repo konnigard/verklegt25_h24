@@ -19,3 +19,9 @@ class TeamLogicClass:
     def updateTeam(self, team):
         """ Updates an existing team in the data layer """
         self.DataWrapper.updateTeam(team)
+
+    def isTeamNameAvailable(self, teamName: str) -> bool:
+        """ Checks if a team name is available (not already taken) """
+        all_teams = self.DataWrapper.sendToLogic()
+        existing_team_names = [team.teamName.lower() for team in all_teams]
+        return teamName.lower() not in existing_team_names

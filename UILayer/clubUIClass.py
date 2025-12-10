@@ -10,17 +10,28 @@ class ClubUI:
     def createClub(self):
         """ Creates a new club by collecting user input """
         print("\n===== REGISTER NEW CLUB =====")
-        print()
+        print("(Enter 'b' at any prompt to cancel)\n")
+
         clubname = input("Please enter the Clubname: ").strip()
-        teamlist = input("Please enter the Teamlist (comma-separated, or leave blank): ").strip()
+        if clubname.lower() == 'b':
+            print("Registration cancelled.")
+            return
+
         hometown = input("Please enter the Hometown: ").strip()
+        if hometown.lower() == 'b':
+            print("Registration cancelled.")
+            return
+
         country = input("Please enter the Country: ").strip()
+        if country.lower() == 'b':
+            print("Registration cancelled.")
+            return
 
         if not clubname or not hometown or not country:
             print("Error: Clubname, Hometown, and Country are required!")
             return
 
-        newClub = Club(clubname, hometown, country, teamlist)
+        newClub = Club(clubname, hometown, country)
         self.LogicWrapper.saveClubFromUI(newClub)
         print(f"\nClub '{clubname}' has been successfully registered!")
 
@@ -28,7 +39,6 @@ class ClubUI:
         """ Displays detailed information about a specific club """
         while True:
             print("\n===== CLUB DETAILS =====")
-            print()
             print(f"Club name: {club.clubname}")
             print(f"Hometown:  {club.hometown}")
             print(f"Country:   {club.country}")

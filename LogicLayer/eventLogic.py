@@ -20,11 +20,11 @@ class EventLogicClass:
         """Saves a new event to the data layer"""
         self.DataWrapper.writeEvent(event)
 
-    def createEventFromData(self, eventID, tournamentName, teamHome, teamAway,
+    def createEventFromData(self, tournamentName, teamHome, teamAway,
                            eventDate, eventTime, location, status="scheduled"):
-        """Creates an event object from raw data"""
-        event = Event(eventID, tournamentName, teamHome, teamAway,
-                     eventDate, eventTime, location, status)
+        """Creates an event object from raw data (EventID will be auto-generated)"""
+        event = Event(eventID="", tournamentName=tournamentName, teamHome=teamHome, teamAway=teamAway,
+                     eventDate=eventDate, eventTime=eventTime, location=location, status=status)
         return event
 
     def recordEventScore(self, eventID: str, homeScore: int, awayScore: int):

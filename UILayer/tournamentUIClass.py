@@ -12,9 +12,11 @@ class TournamentUI:
     # Passa að það séu bara leyfðar alvöru dagsetningar og tölustafir.
 
     def _ask_for_valid_date(self, prompt: str) -> str:
-        """Ask until user enters a valid date in YYYY-MM-DD format."""
+        """Ask until user enters a valid date in YYYY-MM-DD format or 'b' to cancel."""
         while True:
-            value = input(prompt).strip()
+            value = input(prompt + " (or 'b' to cancel): ").strip()
+            if value.lower() == 'b':
+                return None
             try:
                 datetime.strptime(value, "%Y-%m-%d")
                 return value
@@ -22,9 +24,11 @@ class TournamentUI:
                 print("Invalid date. Please use format YYYY-MM-DD.")
 
     def _ask_for_digits_only(self, prompt: str) -> str:
-        """Ask until user enters digits only (for phone numbers etc.)."""
+        """Ask until user enters digits only (for phone numbers etc.) or 'b' to cancel."""
         while True:
-            value = input(prompt).strip()
+            value = input(prompt + " (or 'b' to cancel): ").strip()
+            if value.lower() == 'b':
+                return None
             if value.isdigit():
                 return value
             print("This field must contain digits only. Please try again.")
@@ -59,21 +63,47 @@ class TournamentUI:
         """Collect info and ask LogicLayerAPI to create a tournament."""
 
         print("\nRegister tournament")
+        print("(Enter 'b' at any prompt to cancel)\n")
 
         name = input("Tournament name: ").strip()
-        game = input("Game: ").strip()
-        location = input("Location: ").strip()
+        if name.lower() == 'b':
+            print("Tournament registration cancelled.")
+            return
 
-        start_date = self._ask_for_valid_date(
-            "Start date (YYYY-MM-DD): "
-        )
-        end_date = self._ask_for_valid_date(
-            "End date   (YYYY-MM-DD): "
-        )
+        game = input("Game: ").strip()
+        if game.lower() == 'b':
+            print("Tournament registration cancelled.")
+            return
+
+        location = input("Location: ").strip()
+        if location.lower() == 'b':
+            print("Tournament registration cancelled.")
+            return
+
+        start_date = self._ask_for_valid_date("Start date (YYYY-MM-DD)")
+        if start_date is None:
+            print("Tournament registration cancelled.")
+            return
+
+        end_date = self._ask_for_valid_date("End date   (YYYY-MM-DD)")
+        if end_date is None:
+            print("Tournament registration cancelled.")
+            return
 
         contact_name = input("Contact person name: ").strip()
-        contact_phone = self._ask_for_digits_only("Contact phone: ")
+        if contact_name.lower() == 'b':
+            print("Tournament registration cancelled.")
+            return
+
+        contact_phone = self._ask_for_digits_only("Contact phone")
+        if contact_phone is None:
+            print("Tournament registration cancelled.")
+            return
+
         contact_email = input("Contact email: ").strip()
+        if contact_email.lower() == 'b':
+            print("Tournament registration cancelled.")
+            return
 
         # show summary and confirm
         print("\nConfirm tournament:")
@@ -254,11 +284,20 @@ class TournamentUI:
         # Get already registered teams
         registered_teams = self.logic.get_teams_for_tournament(tournament.name)
 
-        # Filter out already registered teams
-        available_teams = [team for team in all_teams if team.teamName not in registered_teams]
+        # Filter out already registered teams and teams with date conflicts
+        available_teams = []
+        for team in all_teams:
+            # Skip if already registered
+            if team.teamName in registered_teams:
+                continue
+            # Skip if team has date conflict with this tournament
+            if self.logic.has_team_tournament_date_conflict(tournament.name, team.teamName):
+                continue
+            available_teams.append(team)
 
         if not available_teams:
-            print("All teams are already registered for this tournament.")
+            print("No teams available for this tournament.")
+            print("(Teams may already be registered or have date conflicts with other tournaments)")
             input("\nPress Enter to continue...")
             return
 
@@ -314,13 +353,11 @@ class TournamentUI:
 
                 if confirm == "y":
                     # Register all selected teams
-                    registered_count = 0
                     for team in selected_teams:
                         self.logic.register_team_for_tournament(tournament.name, team.teamName)
-                        registered_count += 1
 
                     # Show success message
-                    print(f"\n✓ Successfully registered {registered_count} team(s)!")
+                    print(f"\n✓ Successfully registered {len(selected_teams)} team(s)!")
                     for team in selected_teams:
                         print(f"  ✓ {team.teamName}")
                     input("\nPress Enter to continue...")

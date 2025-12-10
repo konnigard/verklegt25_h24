@@ -1,7 +1,7 @@
 from Models.playerModel import Player
 
 class Team:
-    def __init__(self, teamID: str, teamName: str, teamClub: str, captain: str = ""):
+    def __init__(self, teamID: str = "", teamName: str = "", teamClub: str = "", captain: str = ""):
         self.teamID: str = teamID
         self.teamName: str = teamName
         self.teamClub: str = teamClub

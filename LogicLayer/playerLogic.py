@@ -18,3 +18,9 @@ class PlayerLogicClass:
         """ Gets players for a specific team """
         players = self.DataWrapper.readPlayersByTeam(teamName)
         return players
+
+    def isUsernameAvailable(self, username: str) -> bool:
+        """ Checks if a username is available (not already taken) """
+        all_players = self.DataWrapper.readPlayers()
+        existing_usernames = [player.username.lower() for player in all_players]
+        return username.lower() not in existing_usernames

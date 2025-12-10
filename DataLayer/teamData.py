@@ -4,8 +4,22 @@ from Models.teamModel import Team
 class TeamData:
     def __init__(self):
         pass
-    
+
+    def _getNextTeamID(self) -> str:
+        """Generates the next available TeamID"""
+        teams = self.readAllTeams()
+        if not teams:
+            return "1"
+
+        # Find the maximum ID and increment
+        max_id = max(int(team.teamID) for team in teams)
+        return str(max_id + 1)
+
     def saveNewTeam(self, newTeam: Team):
+        # Auto-generate TeamID if not set or empty
+        if not newTeam.teamID:
+            newTeam.teamID = self._getNextTeamID()
+
         with open('DataLayer/repository/TeamDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             # Write team with captain field (username)

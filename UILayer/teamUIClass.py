@@ -11,6 +11,7 @@ class TeamUI:
         """ Creates new team through input from user """
 
         print("\nRegister New Team")
+        print("(Enter 'b' at any prompt to cancel)\n")
 
         # Check if clubs exist
         clubs = self.LogicWrapper.sendClubInfoToUI()
@@ -19,9 +20,20 @@ class TeamUI:
             input("Press Enter to continue...")
             return
 
-        #Input from user
-        teamID = input("Team ID: ").strip()
-        teamName = input("Team Name: ").strip()
+        # Check team name uniqueness
+        while True:
+            teamName = input("Team Name: ").strip()
+            if teamName.lower() == 'b':
+                print("Registration cancelled.")
+                return
+            if not teamName:
+                print("Team name cannot be empty.")
+                continue
+
+            if self.LogicWrapper.is_team_name_available(teamName):
+                break
+            else:
+                print(f"Team name '{teamName}' is already taken. Please choose another name.")
 
         # Sort clubs by name using Icelandic sorting order
         clubs_sorted = sort_by_name(clubs, 'clubname')
@@ -32,7 +44,10 @@ class TeamUI:
             print(f"{idx}) {club.clubname}")
 
         while True:
-            choice = input("Club (number): ").strip()
+            choice = input("Club (number or 'b' to cancel): ").strip()
+            if choice.lower() == 'b':
+                print("Registration cancelled.")
+                return
             if choice.isdigit():
                 idx = int(choice)
                 if 1 <= idx <= len(clubs_sorted):
@@ -42,7 +57,6 @@ class TeamUI:
 
         # Show summary and confirm
         print("\nConfirm registration:")
-        print(f"  Team ID:   {teamID}")
         print(f"  Team Name: {teamName}")
         print(f"  Club:      {clubName}")
 
@@ -52,8 +66,8 @@ class TeamUI:
             print("Registration cancelled.")
             return
 
-        # Create Team and send to logic layer
-        newTeam: Team = Team(teamID, teamName, clubName)
+        # Create Team and send to logic layer (TeamID will be auto-generated)
+        newTeam: Team = Team(teamID="", teamName=teamName, teamClub=clubName)
         self.LogicWrapper.addNewTeam(newTeam)
         print("Team registered successfully.") 
     
@@ -127,6 +141,21 @@ class TeamUI:
                 print(f"Players:   {player_list}")
             else:
                 print("Players:   No players registered")
+
+            # Get tournament history for this team
+            tournament_names = self.LogicWrapper.get_tournaments_for_team(team.teamName)
+            if tournament_names:
+                all_tournaments = self.LogicWrapper.get_all_tournaments()
+                # Get tournament objects for this team
+                team_tournaments = [t for t in all_tournaments if t.name in tournament_names]
+                # Sort by start date in reverse order (most recent first)
+                team_tournaments_sorted = sorted(team_tournaments, key=lambda t: t.startDate, reverse=True)
+
+                print("\nTournaments:")
+                for tournament in team_tournaments_sorted:
+                    print(f"  • {tournament.name} - {tournament.startDate}")
+            else:
+                print("\nTournaments: No tournaments registered")
 
             print("\n===========================")
             print("1) Select/Change captain")

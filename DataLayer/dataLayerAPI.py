@@ -31,7 +31,7 @@ class DataWrapper:
         return teamList
     
     def LoadTeamByID(self, teamID ) -> Team:
-        t : Team = Team(teamID, "smuu", "Plee")
+        t : Team = Team(teamID=teamID, teamName="smuu", teamClub="Plee")
         return t
     
     def writeNewTeam(self, team: Team):

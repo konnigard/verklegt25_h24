@@ -11,9 +11,11 @@ class EventUI:
         self.logic = LogicWrapper()
 
     def _ask_for_valid_date(self, prompt: str) -> str:
-        """Ask until user enters a valid date in YYYY-MM-DD format."""
+        """Ask until user enters a valid date in YYYY-MM-DD format or 'b' to cancel."""
         while True:
-            value = input(prompt).strip()
+            value = input(prompt + " (or 'b' to cancel): ").strip()
+            if value.lower() == 'b':
+                return None
             try:
                 datetime.strptime(value, "%Y-%m-%d")
                 return value
@@ -21,9 +23,11 @@ class EventUI:
                 print("Invalid date. Please use format YYYY-MM-DD.")
 
     def _ask_for_valid_time(self, prompt: str) -> str:
-        """Ask until user enters a valid time in HH:MM format."""
+        """Ask until user enters a valid time in HH:MM format or 'b' to cancel."""
         while True:
-            value = input(prompt).strip()
+            value = input(prompt + " (or 'b' to cancel): ").strip()
+            if value.lower() == 'b':
+                return None
             try:
                 datetime.strptime(value, "%H:%M")
                 return value
@@ -34,7 +38,6 @@ class EventUI:
         """Main event menu"""
         while True:
             print("\n===== EVENT MENU =====")
-            print()
             print("1) Create new event")
             print("2) View all events")
             print("3) View events by tournament")
@@ -63,6 +66,7 @@ class EventUI:
     def create_event(self) -> None:
         """Create a new event/match"""
         print("\nCreate New Event")
+        print("(Enter 'b' at any prompt to cancel)\n")
 
         # Get list of tournaments
         tournaments = self.logic.get_all_tournaments()
@@ -80,7 +84,10 @@ class EventUI:
             print(f"{idx}) {t.name}")
 
         while True:
-            choice = input("Tournament (number): ").strip()
+            choice = input("Tournament (number or 'b' to cancel): ").strip()
+            if choice.lower() == 'b':
+                print("Event creation cancelled.")
+                return
             if choice.isdigit():
                 idx = int(choice)
                 if 1 <= idx <= len(tournaments):
@@ -88,60 +95,114 @@ class EventUI:
                     break
             print("Invalid choice, try again.")
 
-        # Get event details
-        eventID = input("Event ID: ").strip()
-        teamHome = input("Home team: ").strip()
-        teamAway = input("Away team: ").strip()
+        # Get teams registered for this tournament
+        registered_teams = self.logic.get_teams_for_tournament(selected_tournament.name)
 
-        # Check if teams are registered for this tournament
-        if not self.logic.is_team_registered_for_tournament(selected_tournament.name, teamHome):
-            print(f"\n❌ NOT REGISTERED: Team '{teamHome}' is not registered for tournament '{selected_tournament.name}'")
-            print("   Please register the team for this tournament first.")
+        if not registered_teams:
+            print(f"\n❌ NO TEAMS REGISTERED: No teams are registered for tournament '{selected_tournament.name}'")
+            print("   Please register teams for this tournament first.")
             input("\nPress Enter to continue...")
             return
 
-        if not self.logic.is_team_registered_for_tournament(selected_tournament.name, teamAway):
-            print(f"\n❌ NOT REGISTERED: Team '{teamAway}' is not registered for tournament '{selected_tournament.name}'")
-            print("   Please register the team for this tournament first.")
+        if len(registered_teams) < 2:
+            print(f"\n❌ INSUFFICIENT TEAMS: Only {len(registered_teams)} team(s) registered for '{selected_tournament.name}'")
+            print("   At least 2 teams are required to create an event.")
             input("\nPress Enter to continue...")
             return
 
-        eventDate = self._ask_for_valid_date("Event date (YYYY-MM-DD): ")
-        eventTime = self._ask_for_valid_time("Event time (HH:MM): ")
+        # Get all teams and filter to only registered teams
+        all_teams = self.logic.sendTeamInfoToUI()
+        registered_team_objects = [t for t in all_teams if t.teamName in registered_teams]
+
+        # Get unfinished events for THIS TOURNAMENT to check which teams are already scheduled
+        # Teams can only be in one unfinished event at a time within the same tournament
+        # Winners of completed events in this tournament should be available for next round
+        tournament_events = self.logic.get_events_by_tournament(selected_tournament.name)
+        teams_in_unfinished_events = set()
+        for event in tournament_events:
+            if event.status != "completed":  # scheduled or in_progress
+                teams_in_unfinished_events.add(event.teamHome)
+                teams_in_unfinished_events.add(event.teamAway)
+
+        # Filter out eliminated teams and teams already in unfinished events
+        available_teams = []
+        for team in registered_team_objects:
+            # Check if team is eliminated
+            is_eliminated, elim_msg = self.logic.check_team_eliminated(team.teamName, selected_tournament.name)
+            if is_eliminated:
+                continue
+
+            # Check if team is already in an unfinished event
+            if team.teamName in teams_in_unfinished_events:
+                continue
+
+            available_teams.append(team)
+
+        # Check if enough available teams remain
+        if len(available_teams) < 2:
+            print(f"\n❌ INSUFFICIENT TEAMS: Only {len(available_teams)} team(s) available for '{selected_tournament.name}'")
+            print("   Teams are unavailable if they are:")
+            print("   - Already eliminated from the tournament")
+            print("   - Already scheduled for an unfinished event")
+            print("   At least 2 available teams are required to create an event.")
+            input("\nPress Enter to continue...")
+            return
+
+        # Sort available teams by name using Icelandic sorting order
+        available_teams = sort_by_name(available_teams, 'teamName')
+
+        # Select home team
+        print("\nSelect HOME team:")
+        for idx, team in enumerate(available_teams, start=1):
+            print(f"{idx}) {team.teamName} (Club: {team.teamClub})")
+
+        while True:
+            choice = input("Home team (number or 'b' to cancel): ").strip()
+            if choice.lower() == 'b':
+                print("Event creation cancelled.")
+                return
+            if choice.isdigit():
+                idx = int(choice)
+                if 1 <= idx <= len(available_teams):
+                    teamHome = available_teams[idx - 1].teamName
+                    break
+            print("Invalid choice, try again.")
+
+        # Select away team (different from home team)
+        print("\nSelect AWAY team:")
+        away_team_options = [t for t in available_teams if t.teamName != teamHome]
+        for idx, team in enumerate(away_team_options, start=1):
+            print(f"{idx}) {team.teamName} (Club: {team.teamClub})")
+
+        while True:
+            choice = input("Away team (number or 'b' to cancel): ").strip()
+            if choice.lower() == 'b':
+                print("Event creation cancelled.")
+                return
+            if choice.isdigit():
+                idx = int(choice)
+                if 1 <= idx <= len(away_team_options):
+                    teamAway = away_team_options[idx - 1].teamName
+                    break
+            print("Invalid choice, try again.")
+
+        eventDate = self._ask_for_valid_date("Event date (YYYY-MM-DD)")
+        if eventDate is None:
+            print("Event creation cancelled.")
+            return
+
+        eventTime = self._ask_for_valid_time("Event time (HH:MM)")
+        if eventTime is None:
+            print("Event creation cancelled.")
+            return
+
         location = input("Location: ").strip()
-
-        # Check for team conflicts
-        home_conflict, home_msg = self.logic.check_team_availability(teamHome, eventDate, eventTime)
-        if home_conflict:
-            print(f"\n❌ CONFLICT: {home_msg}")
-            input("\nPress Enter to continue...")
-            return
-
-        away_conflict, away_msg = self.logic.check_team_availability(teamAway, eventDate, eventTime)
-        if away_conflict:
-            print(f"\n❌ CONFLICT: {away_msg}")
-            input("\nPress Enter to continue...")
-            return
-
-        # Check for team elimination (knockout tournament)
-        home_eliminated, home_elim_msg = self.logic.check_team_eliminated(teamHome, selected_tournament.name)
-        if home_eliminated:
-            print(f"\n❌ ELIMINATED: {home_elim_msg}")
-            print("   In knockout tournaments, only winning teams can advance.")
-            input("\nPress Enter to continue...")
-            return
-
-        away_eliminated, away_elim_msg = self.logic.check_team_eliminated(teamAway, selected_tournament.name)
-        if away_eliminated:
-            print(f"\n❌ ELIMINATED: {away_elim_msg}")
-            print("   In knockout tournaments, only winning teams can advance.")
-            input("\nPress Enter to continue...")
+        if location.lower() == 'b':
+            print("Event creation cancelled.")
             return
 
         # Show summary and confirm
         print("\nConfirm event creation:")
-        print()
-        print(f"  Event ID:     {eventID}")
         print(f"  Tournament:   {selected_tournament.name}")
         print(f"  Match:        {teamHome} vs {teamAway}")
         print(f"  Date:         {eventDate}")
@@ -153,9 +214,8 @@ class EventUI:
             print("Event creation cancelled.")
             return
 
-        # Create event
+        # Create event (EventID will be auto-generated)
         self.logic.create_event(
-            eventID=eventID,
             tournamentName=selected_tournament.name,
             teamHome=teamHome,
             teamAway=teamAway,

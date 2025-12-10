@@ -1,6 +1,6 @@
 class Event:
-    def __init__(self, eventID: str, tournamentName: str, teamHome: str, teamAway: str,
-                 eventDate: str, eventTime: str, location: str, status: str = "scheduled"):
+    def __init__(self, eventID: str = "", tournamentName: str = "", teamHome: str = "", teamAway: str = "",
+                 eventDate: str = "", eventTime: str = "", location: str = "", status: str = "scheduled"):
         self.eventID: str = eventID
         self.tournamentName: str = tournamentName
         self.teamHome: str = teamHome

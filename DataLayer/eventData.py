@@ -5,8 +5,22 @@ class EventData:
     def __init__(self):
         pass
 
+    def _getNextEventID(self) -> str:
+        """Generates the next available EventID"""
+        events = self.loadEvents()
+        if not events:
+            return "1"
+
+        # Find the maximum ID and increment
+        max_id = max(int(event.eventID) for event in events)
+        return str(max_id + 1)
+
     def saveEvent(self, event: Event):
         """Saves an event to the CSV database"""
+        # Auto-generate EventID if not set or empty
+        if not event.eventID:
+            event.eventID = self._getNextEventID()
+
         with open('DataLayer/repository/EventDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             csvWriter.writerow([
