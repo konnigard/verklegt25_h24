@@ -1,6 +1,7 @@
 from UILayer.playerUIClass import playerUI
 from UILayer.teamUIClass import TeamUI
 from UILayer.clubUIClass import ClubUI
+from UILayer.clubUIClass import ClubUI
 
 
 def show_see_menu(ui: playerUI) -> bool:

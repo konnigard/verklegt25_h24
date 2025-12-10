@@ -5,29 +5,40 @@ class TeamData:
     def __init__(self):
         pass
     
-    #def writeTeams(self):
-        #""" Registers the team to the CSV """
+    def saveNewTeam(self, newTeam: Team):
+        with open('datalayer/repository/TeamDB.csv', mode='a', newline='') as dataBase:
+            csvWriter = csv.writer(dataBase, delimiter=';')
+            # teamlist is now a string, write it directly
+            csvWriter.writerow([newTeam.teamID, newTeam.teamName, newTeam.teamClub])
 
-        #from DataLayer.dataLayerAPI import DataWrapper
-        #with open('datalayer/repository/TeamDB', mode= 'w') as dataBase: #Opens file in write
-          #  toBeWritten = DataWrapper.sendToData() #Input from user
-         #   cvsWritter = csv.writer(toBeWritten)
-        #return 
-
-
-    def readTeams(self): 
+    def readAllTeams(self) -> list[Team]: 
         """ Reads the CSV to find the teams """
         
+        #Creates Emptylist that gets added to in the for loop
         teamList = []
-        with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase: #Opens the file 
+
+        #Opens the file 
+        with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase: 
             cvsDB = csv.reader(dataBase, delimiter= ';')
-        
-            for info in cvsDB: #Returns line per line in csv
-                teamName = info[0]
-                teamClub = info[1]
-                readTeam = Team(teamName, teamClub)
+
+            #Returns line per line in csv
+            for info in cvsDB: 
+                teamID = info[0]
+                teamName = info[1]
+                teamClub = info[2]
+                teammates = info[3]
+                readTeam = Team(teamID, teamName, teamClub, teammates)
                 teamList.append(readTeam)
             
         return teamList
     #name, club, players
+
+    def checksTeamID(self) -> list[Team]:
+        teamIDList = []
+        with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase:
+            csvDB = csv.reader(dataBase, delimiter= ';')
+
+            for row in csvDB:
+                teamIDList.append(row[0])
+        return teamIDList
 

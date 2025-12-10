@@ -12,7 +12,7 @@ class ClubData:
             # teamlist is now a string, write it directly
             csvWriter.writerow([club.clubname, club.teamlist, club.hometown, club.country])
 
-    def readClubs(self):
+    def readClubs(self) -> list[Club]:
         """ Reads the CSV to find all clubs """
         clubList = []
         try:
