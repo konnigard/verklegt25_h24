@@ -7,7 +7,7 @@ class ClubData:
 
     def writeClub(self, club: Club):
         """ Registers a club to the CSV """
-        with open('datalayer/repository/ClubDB.csv', mode='a', newline='') as dataBase:
+        with open('DataLayer/repository/ClubDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             # teamlist is now a string, write it directly
             csvWriter.writerow([club.clubname, club.teamlist, club.hometown, club.country])
@@ -16,7 +16,7 @@ class ClubData:
         """ Reads the CSV to find all clubs """
         clubList = []
         try:
-            with open('datalayer/repository/ClubDB.csv', mode='r') as dataBase:
+            with open('DataLayer/repository/ClubDB.csv', mode='r') as dataBase:
                 csvDB = csv.reader(dataBase, delimiter=';')
 
                 for info in csvDB:

@@ -1,6 +1,7 @@
 #from file import class
 from Models.clubModel import Club
 from LogicLayer.logicLayerAPI import LogicWrapper
+from UILayer.sortingUtils import sort_by_name
 
 class ClubUI:
     def __init__(self):
@@ -8,14 +9,14 @@ class ClubUI:
 
     def createClub(self):
         """ Creates a new club by collecting user input """
-        print("\n===== Ská nýjan klúbb =====")
-        clubname = input("Skráðu inn nafn klúbbs: ").strip()
-        teamlist = input("Skráðu inn lið (comma-separated, or leave blank): ").strip()
-        hometown = input("Settu inn Heimabæ liðs (heimilisfang: ").strip()
-        country = input("Skráu inn land: ").strip()
+        print("\n===== REGISTER NEW CLUB =====")
+        clubname = input("Please enter the Clubname: ").strip()
+        teamlist = input("Please enter the Teamlist (comma-separated, or leave blank): ").strip()
+        hometown = input("Please enter the Hometown: ").strip()
+        country = input("Please enter the Country: ").strip()
 
         if not clubname or not hometown or not country:
-            print("Villa kom upp vinsamlegast skrá inn: Klúbbanafn, Heimabæ liðs og land !")
+            print("Error: Clubname, Hometown, and Country are required!")
             return
 
         newClub = Club(clubname, hometown, country, teamlist)
@@ -25,12 +26,27 @@ class ClubUI:
     def showClubDetails(self, club: Club):
         """ Displays detailed information about a specific club """
         while True:
-            print("\n===== UPPLÝSINGAR UM KLÚBB =====")
-            print(club)
+            print("\n===== CLUB DETAILS =====")
+            print(f"Club name: {club.clubname}")
+            print(f"Hometown:  {club.hometown}")
+            print(f"Country:   {club.country}")
+
+            # Get all teams belonging to this club
+            all_teams = self.LogicWrapper.sendTeamInfoToUI()
+            club_teams = [team for team in all_teams if team.teamClub == club.clubname]
+
+            if club_teams:
+                # Sort teams by name using Icelandic sorting order
+                club_teams_sorted = sort_by_name(club_teams, 'teamName')
+                teams_display = ", ".join([team.teamName for team in club_teams_sorted])
+                print(f"Teams:     {teams_display}")
+            else:
+                print("Teams:     No teams registered")
+
             print()
             print("b) Back")
             print("q) Quit")
-            choice = input("Veldu aðgerð: ").strip().upper()
+            choice = input("Choose action: ").strip().upper()
 
             if choice == "B":
                 break
@@ -43,10 +59,14 @@ class ClubUI:
         """ Displays all registered clubs """
         clubList = self.LogicWrapper.sendClubInfoToUI()
 
+        # Sort clubs by name using Icelandic sorting order
+        if clubList:
+            clubList = sort_by_name(clubList, 'clubname')
+
         while True:
-            print("\n===== SKRÁ KLÚBB =====")
+            print("\n===== REGISTERED CLUBS =====")
             if not clubList:
-                print("Enginn klúbbur skráður enþá.")
+                print("No clubs registered yet.")
             else:
                 for idx, club in enumerate(clubList, start=1):
                     print(f"{idx}. {club.clubname}")
@@ -54,7 +74,7 @@ class ClubUI:
             print()
             print("b) Back")
             print("q) Quit")
-            choice = input("Veldu aðgerð: ").strip().upper()
+            choice = input("Choose action: ").strip().upper()
 
             if choice == "B":
                 break
@@ -72,13 +92,13 @@ class ClubUI:
     def clubMenu(self):
         """ Main menu for club operations """
         while True:
-            print("\n===== Club MENU =====")
-            print("1 Skrá nýjan klúbb")
-            print("2 Skoða klúbb")
+            print("\n===== CLUB MENU =====")
+            print("1 Register new club")
+            print("2 Show clubs")
             print()
             print("b) Back")
             print("q) Quit")
-            choice = input("Veldu aðgerð: ").strip().upper()
+            choice = input("Choose action: ").strip().upper()
 
             if choice == "1":
                 self.createClub()

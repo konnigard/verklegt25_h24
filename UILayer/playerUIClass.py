@@ -1,6 +1,7 @@
 from datetime import datetime
 from Models.playerModel import Player
 from LogicLayer.logicLayerAPI import LogicWrapper
+from UILayer.sortingUtils import sort_by_name
 
 
 class playerUI:
@@ -71,6 +72,29 @@ class playerUI:
             else:
                 break
 
+        # Select team
+        teams = self.logic.sendTeamInfoToUI()
+        if not teams:
+            print("\nNo teams available. Please register a team first before registering players.")
+            input("Press Enter to continue...")
+            return
+
+        # Sort teams by name using Icelandic sorting order
+        teams = sort_by_name(teams, 'teamName')
+
+        print("\nSelect team:")
+        for idx, team in enumerate(teams, start=1):
+            print(f"{idx}) {team.teamName}")
+
+        while True:
+            choice = input("Team (number): ").strip()
+            if choice.isdigit():
+                idx = int(choice)
+                if 1 <= idx <= len(teams):
+                    teamName = teams[idx - 1].teamName
+                    break
+            print("Invalid choice, try again.")
+
         # show summary and confirm
         print("\nConfirm registration:")
         print(f"  Name:         {name}")
@@ -80,6 +104,7 @@ class playerUI:
         print(f"  Email:        {email}")
         print(f"  Link:         {link}")
         print(f"  Username:     {username}")
+        print(f"  Team:         {teamName}")
 
         confirm = input("Confirm registration (y/n): ").strip().lower()
 
@@ -96,10 +121,56 @@ class playerUI:
             email=email,
             link=link,
             username=username,
+            teamName=teamName
         )
 
         self.logic.create_player(player)
         print("Player registered.")
 
     def show_players(self) -> None:
-        print("\n[UI] Show players not implemented yet.")
+        """Displays all registered players"""
+        playerList = self.logic.sendPlayerInfoToUI()
+
+        # Sort players by name using Icelandic sorting order
+        if playerList:
+            playerList = sort_by_name(playerList, 'name')
+
+        while True:
+            print("\n===== REGISTERED PLAYERS =====")
+            if not playerList:
+                print("No players registered yet.")
+            else:
+                for idx, player in enumerate(playerList, start=1):
+                    print(f"{idx}. {player.name} (@{player.username}) - Team: {player.teamName}")
+
+            print()
+            print("b) Back")
+            print("q) Quit")
+            choice = input("Choose action: ").strip().upper()
+
+            if choice == "B":
+                break
+            elif choice == "Q":
+                quit()
+            elif choice.isdigit():
+                player_number = int(choice)
+                if 1 <= player_number <= len(playerList):
+                    self.show_player_details(playerList[player_number - 1])
+                else:
+                    print(f"Invalid player number. Please choose between 1 and {len(playerList)}.")
+            else:
+                print("Invalid choice, try again.")
+
+    def show_player_details(self, player) -> None:
+        """Display detailed information about a player"""
+        print("\n===== PLAYER DETAILS =====")
+        print(f"Name:         {player.name}")
+        print(f"Username:     {player.username}")
+        print(f"Team:         {player.teamName}")
+        print(f"Date of Birth:{player.dob}")
+        print(f"Address:      {player.address}")
+        print(f"Phone:        {player.phone_number}")
+        print(f"Email:        {player.email}")
+        print(f"Link:         {player.link}")
+        print()
+        input("Press Enter to continue...")

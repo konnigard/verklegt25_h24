@@ -1,12 +1,13 @@
 from datetime import datetime
-from LogicLayer.logicLayerAPI import LogicLayerAPI
+from LogicLayer.logicLayerAPI import LogicWrapper
+from UILayer.sortingUtils import sort_by_name
 
 
 class TournamentUI:
-    """UI layer for tournaments ONLY speak to LogicLayerAPI."""
+    """UI layer for tournaments ONLY speak to LogicWrapper."""
 
     def __init__(self) -> None:
-        self.logic = LogicLayerAPI()
+        self.logic = LogicWrapper()
 
     # Passa að það séu bara leyfðar alvöru dagsetningar og tölustafir.
 
@@ -104,26 +105,310 @@ class TournamentUI:
 
         print("Tournament registered.")
 
-    # See tournaments 
+    # See tournaments
 
     def read_tournaments(self) -> None:
-        """ Ask LogicLayerAPI for tournaments and display them, exact structure of the returned data is up to Logic layer.
-        Here we assume a list of dicts or objects with simple attributes."""
-        tournaments = self.logic.get_all_tournaments()
+        """Display all registered tournaments"""
+        tournamentList = self.logic.get_all_tournaments()
 
-        if not tournaments:
-            print("\nNo tournaments found.")
+        # Sort tournaments by name using Icelandic sorting order
+        if tournamentList:
+            tournamentList = sort_by_name(tournamentList, 'name')
+
+        while True:
+            print("\n===== REGISTERED TOURNAMENTS =====")
+            if not tournamentList:
+                print("No tournaments registered yet.")
+            else:
+                for idx, tournament in enumerate(tournamentList, start=1):
+                    print(f"{idx}. {tournament.name} ({tournament.startDate} to {tournament.endDate})")
+
+            print()
+            print("b) Back")
+            print("q) Quit")
+            choice = input("Choose action: ").strip().upper()
+
+            if choice == "B":
+                break
+            elif choice == "Q":
+                quit()
+            elif choice.isdigit():
+                tournament_number = int(choice)
+                if 1 <= tournament_number <= len(tournamentList):
+                    self.show_tournament_details(tournamentList[tournament_number - 1])
+                else:
+                    print(f"Invalid tournament number. Please choose between 1 and {len(tournamentList)}.")
+            else:
+                print("Invalid choice, try again.")
+
+    def show_tournament_details(self, tournament) -> None:
+        """Display detailed information about a tournament"""
+        while True:
+            print("\n===== TOURNAMENT DETAILS =====")
+            print(f"Name:          {tournament.name}")
+            print(f"Game:          {tournament.game}")
+            print(f"Location:      {tournament.location}")
+            print(f"Start date:    {tournament.startDate}")
+            print(f"End date:      {tournament.endDate}")
+            print(f"Contact name:  {tournament.contact}")
+            print(f"Contact phone: {tournament.contactPhone}")
+            print(f"Contact email: {tournament.contactEmail}")
+
+            # Get registered teams
+            registered_teams = self.logic.get_teams_for_tournament(tournament.name)
+            if registered_teams:
+                # Sort teams by name using Icelandic sorting order
+                registered_teams_sorted = sorted(registered_teams, key=lambda t: t)
+                teams_display = ", ".join(registered_teams_sorted)
+                print(f"Registered teams: {teams_display}")
+            else:
+                print("Registered teams: No teams registered yet")
+
+            print()
+            print("1) View events for this tournament")
+            print("2) View registered teams")
+            print("3) Register team for tournament")
+            print("4) Unregister team from tournament")
+            print("b) Back")
+            print("q) Quit")
+
+            choice = input("Choose action: ").strip().lower()
+
+            if choice == "1":
+                self.show_tournament_events(tournament)
+            elif choice == "2":
+                self.view_registered_teams(tournament)
+            elif choice == "3":
+                self.register_team_for_tournament(tournament)
+            elif choice == "4":
+                self.unregister_team_from_tournament(tournament)
+            elif choice == "b":
+                break
+            elif choice == "q":
+                quit()
+            else:
+                print("Invalid choice, try again.")
+
+    def view_registered_teams(self, tournament) -> None:
+        """Display detailed information about teams registered for this tournament"""
+        print(f"\n===== TEAMS REGISTERED FOR {tournament.name.upper()} =====")
+
+        # Get registered teams
+        registered_team_names = self.logic.get_teams_for_tournament(tournament.name)
+
+        if not registered_team_names:
+            print("No teams registered for this tournament yet.")
+            input("\nPress Enter to continue...")
             return
 
-        print("\nTournaments:")
-        for idx, t in enumerate(tournaments, start=1):
-            # try to support both dict and object style
-            name = getattr(t, "name", None) or t.get("name", "")
-            start = getattr(t, "start_date", None) or t.get("start_date", "")
-            end = getattr(t, "end_date", None) or t.get("end_date", "")
-            print(f"{idx}) {name} ({start} – {end})")
+        # Get all team objects
+        all_teams = self.logic.sendTeamInfoToUI()
 
-        input("\nPress Enter to go back...")
+        # Filter to get only registered teams with full details
+        registered_teams = [team for team in all_teams if team.teamName in registered_team_names]
+
+        # Sort teams by name using Icelandic sorting order
+        registered_teams_sorted = sort_by_name(registered_teams, 'teamName')
+
+        # Display each team with details
+        for idx, team in enumerate(registered_teams_sorted, start=1):
+            print(f"\n{idx}. {team.teamName}")
+            print(f"   Team ID:  {team.teamID}")
+            print(f"   Club:     {team.teamClub}")
+
+            # Get captain info
+            if team.captain:
+                players = self.logic.get_players_by_team(team.teamName)
+                captain_player = next((p for p in players if p.username == team.captain), None)
+                if captain_player:
+                    print(f"   Captain:  {captain_player.name} (@{team.captain})")
+                else:
+                    print(f"   Captain:  @{team.captain}")
+            else:
+                print(f"   Captain:  No captain selected")
+
+            # Get players
+            players = self.logic.get_players_by_team(team.teamName)
+            if players:
+                players_sorted = sort_by_name(players, 'name')
+                player_count = len(players_sorted)
+                player_names = ", ".join([p.name for p in players_sorted])
+                print(f"   Players:  {player_count} - {player_names}")
+            else:
+                print(f"   Players:  No players registered")
+
+        print(f"\nTotal teams registered: {len(registered_teams_sorted)}")
+        input("\nPress Enter to continue...")
+
+    def register_team_for_tournament(self, tournament) -> None:
+        """Interactive flow for registering teams for a tournament (supports comma-separated input)"""
+        print("\n===== REGISTER TEAM FOR TOURNAMENT =====")
+
+        # Get all teams
+        all_teams = self.logic.sendTeamInfoToUI()
+        if not all_teams:
+            print("No teams available. Please create teams first.")
+            input("\nPress Enter to continue...")
+            return
+
+        # Get already registered teams
+        registered_teams = self.logic.get_teams_for_tournament(tournament.name)
+
+        # Filter out already registered teams
+        available_teams = [team for team in all_teams if team.teamName not in registered_teams]
+
+        if not available_teams:
+            print("All teams are already registered for this tournament.")
+            input("\nPress Enter to continue...")
+            return
+
+        # Sort available teams by name using Icelandic sorting order
+        available_teams_sorted = sort_by_name(available_teams, 'teamName')
+
+        print(f"\nSelect team(s) to register for '{tournament.name}':")
+        for idx, team in enumerate(available_teams_sorted, start=1):
+            print(f"{idx}) {team.teamName} (Club: {team.teamClub})")
+
+        print("\nYou can enter:")
+        print("  - A single number (e.g., 3)")
+        print("  - Multiple numbers separated by commas (e.g., 1,3,5)")
+        print("  - 'b' to go back")
+
+        while True:
+            choice = input("\nTeam(s) (number or comma-separated): ").strip()
+            if choice.lower() == "b":
+                return
+
+            # Parse input - could be single number or comma-separated
+            try:
+                # Split by comma and strip whitespace
+                number_strings = [s.strip() for s in choice.split(',')]
+
+                # Convert to integers
+                indices = []
+                for num_str in number_strings:
+                    if not num_str.isdigit():
+                        raise ValueError(f"'{num_str}' is not a valid number")
+                    idx = int(num_str)
+                    if idx < 1 or idx > len(available_teams_sorted):
+                        raise ValueError(f"Number {idx} is out of range (1-{len(available_teams_sorted)})")
+                    indices.append(idx)
+
+                # Remove duplicates while preserving order
+                seen = set()
+                unique_indices = []
+                for idx in indices:
+                    if idx not in seen:
+                        seen.add(idx)
+                        unique_indices.append(idx)
+
+                # Get selected teams
+                selected_teams = [available_teams_sorted[idx - 1] for idx in unique_indices]
+
+                # Show confirmation
+                print(f"\nRegister the following team(s) for '{tournament.name}'?")
+                for team in selected_teams:
+                    print(f"  • {team.teamName} (Club: {team.teamClub})")
+
+                confirm = input("\nConfirm registration (y/n): ").strip().lower()
+
+                if confirm == "y":
+                    # Register all selected teams
+                    registered_count = 0
+                    for team in selected_teams:
+                        self.logic.register_team_for_tournament(tournament.name, team.teamName)
+                        registered_count += 1
+
+                    # Show success message
+                    print(f"\n✓ Successfully registered {registered_count} team(s)!")
+                    for team in selected_teams:
+                        print(f"  ✓ {team.teamName}")
+                    input("\nPress Enter to continue...")
+                    return
+                else:
+                    print("Registration cancelled.")
+                    return
+
+            except ValueError as e:
+                print(f"Invalid input: {e}")
+                print("Please try again.")
+
+    def unregister_team_from_tournament(self, tournament) -> None:
+        """Interactive flow for unregistering a team from a tournament"""
+        print("\n===== UNREGISTER TEAM FROM TOURNAMENT =====")
+
+        # Get registered teams
+        registered_teams = self.logic.get_teams_for_tournament(tournament.name)
+
+        if not registered_teams:
+            print("No teams registered for this tournament.")
+            input("\nPress Enter to continue...")
+            return
+
+        # Sort teams by name using Icelandic sorting order
+        registered_teams_sorted = sorted(registered_teams, key=lambda t: t)
+
+        print(f"\nSelect team to unregister from '{tournament.name}':")
+        for idx, team_name in enumerate(registered_teams_sorted, start=1):
+            print(f"{idx}) {team_name}")
+
+        print("b) Back")
+
+        while True:
+            choice = input("\nTeam (number): ").strip()
+            if choice.lower() == "b":
+                return
+            if choice.isdigit():
+                idx = int(choice)
+                if 1 <= idx <= len(registered_teams_sorted):
+                    selected_team_name = registered_teams_sorted[idx - 1]
+
+                    # Confirm unregistration
+                    print(f"\nUnregister '{selected_team_name}' from '{tournament.name}'?")
+                    confirm = input("Confirm (y/n): ").strip().lower()
+
+                    if confirm == "y":
+                        self.logic.unregister_team_from_tournament(tournament.name, selected_team_name)
+                        print(f"\n✓ {selected_team_name} unregistered successfully!")
+                        input("\nPress Enter to continue...")
+                        return
+                    else:
+                        print("Unregistration cancelled.")
+                        return
+            print("Invalid choice, try again.")
+
+    def show_tournament_events(self, tournament) -> None:
+        """Display all events for a specific tournament sorted by date and time"""
+        eventList = self.logic.get_events_by_tournament(tournament.name)
+
+        # Sort by date and time
+        eventList.sort(key=lambda e: (e.eventDate, e.eventTime))
+
+        while True:
+            print(f"\n===== EVENTS FOR {tournament.name.upper()} =====")
+            if not eventList:
+                print("No events scheduled for this tournament yet.")
+            else:
+                for idx, event in enumerate(eventList, start=1):
+                    status_symbol = "✓" if event.status == "completed" else "○"
+                    print(f"{idx}. {status_symbol} {event.teamHome} vs {event.teamAway}")
+                    print(f"   Date: {event.eventDate} at {event.eventTime}")
+                    print(f"   Location: {event.location}")
+                    if event.status == "completed":
+                        winner = event.teamHome if event.homeScore > event.awayScore else event.teamAway
+                        print(f"   Score: {event.homeScore} - {event.awayScore} (Winner: {winner} 🏆)")
+                    print()
+
+            print("b) Back")
+            print("q) Quit")
+            choice = input("Choose action: ").strip().lower()
+
+            if choice == "b":
+                break
+            elif choice == "q":
+                quit()
+            else:
+                print("Invalid choice, try again.")
 
     # record match result / validateScore
 
@@ -140,6 +425,9 @@ class TournamentUI:
         if not tournaments:
             print("No tournaments available.")
             return
+
+        # Sort tournaments by name using Icelandic sorting order
+        tournaments = sort_by_name(tournaments, 'name')
 
         print("\nChoose tournament:")
         for idx, t in enumerate(tournaments, start=1):

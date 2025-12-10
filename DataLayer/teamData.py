@@ -6,39 +6,59 @@ class TeamData:
         pass
     
     def saveNewTeam(self, newTeam: Team):
-        with open('datalayer/repository/TeamDB.csv', mode='a', newline='') as dataBase:
+        with open('DataLayer/repository/TeamDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
-            # teamlist is now a string, write it directly
-            csvWriter.writerow([newTeam.teamID, newTeam.teamName, newTeam.teamClub])
+            # Write team with captain field (username)
+            csvWriter.writerow([newTeam.teamID, newTeam.teamName, newTeam.teamClub, newTeam.captain])
 
-    def readAllTeams(self) -> list[Team]: 
+    def readAllTeams(self) -> list[Team]:
         """ Reads the CSV to find the teams """
-        
+
         #Creates Emptylist that gets added to in the for loop
         teamList = []
 
-        #Opens the file 
-        with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase: 
-            cvsDB = csv.reader(dataBase, delimiter= ';')
+        try:
+            #Opens the file
+            with open('DataLayer/repository/TeamDB.csv', mode='r') as dataBase:
+                cvsDB = csv.reader(dataBase, delimiter= ';')
 
-            #Returns line per line in csv
-            for info in cvsDB: 
-                teamID = info[0]
-                teamName = info[1]
-                teamClub = info[2]
-                teammates = info[3]
-                readTeam = Team(teamID, teamName, teamClub, teammates)
-                teamList.append(readTeam)
-            
+                #Returns line per line in csv
+                for info in cvsDB:
+                    if len(info) >= 3:  # Ensure we have all required fields
+                        teamID = info[0]
+                        teamName = info[1]
+                        teamClub = info[2]
+                        captain = info[3] if len(info) >= 4 else ""
+                        readTeam = Team(teamID, teamName, teamClub, captain)
+                        teamList.append(readTeam)
+        except FileNotFoundError:
+            # If file doesn't exist, return empty list
+            pass
+
         return teamList
     #name, club, players
 
-    def checksTeamID(self) -> list[Team]:
-        teamIDList = []
-        with open('datalayer/repository/TeamDB.csv', mode= 'r') as dataBase:
+    def updateTeam(self, updatedTeam: Team):
+        """ Updates an existing team in the CSV """
+        teams = self.readAllTeams()
+
+        with open('DataLayer/repository/TeamDB.csv', mode='w', newline='') as dataBase:
+            csvWriter = csv.writer(dataBase, delimiter=';')
+
+            for team in teams:
+                if team.teamID == updatedTeam.teamID:
+                    # Write the updated team
+                    csvWriter.writerow([updatedTeam.teamID, updatedTeam.teamName, updatedTeam.teamClub, updatedTeam.captain])
+                else:
+                    # Write the existing team unchanged
+                    csvWriter.writerow([team.teamID, team.teamName, team.teamClub, team.captain])
+
+    def checksTeamName(self):
+        teamNameList = []
+        with open('DataLayer/repository/TeamDB.csv', mode='r') as dataBase:
             csvDB = csv.reader(dataBase, delimiter= ';')
 
             for row in csvDB:
-                teamIDList.append(row[0])
-        return teamIDList
+                teamNameList.append(row[1].upper())
+        return teamNameList
 
