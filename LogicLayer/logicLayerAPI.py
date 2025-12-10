@@ -1,6 +1,6 @@
 #from file import class
 from LogicLayer.readTeamLogic  import TeamLogicClassRead
-from playerModel import Player
+from Models.playerModel import Player
 
 
 class LogicLayerAPI:
