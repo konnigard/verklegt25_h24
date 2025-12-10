@@ -9,11 +9,11 @@ class playerUI:
 
     def player_menu(self) -> None:
         while True:
-            print("\n===== PLAYER MENU =====")
-            print("1 Register new player")
-            print("2 Show players")
+            print("\n===== LEIKMANSSKJÁR=====")
+            print("1 Skrá nýjan leikmann")
+            print("2 Skoða leikmann ")
             print("B Back")
-            choice = input("Choose action: ").strip().upper()
+            choice = input("Veldu aðgerð: ").strip().upper()
 
             if choice == "1":
                 self.create_player_flow()
@@ -29,62 +29,62 @@ class playerUI:
     def ask_for_valid_date(self) -> str:
         """Ask until user enters a valid date in YYYY-MM-DD format."""
         while True:
-            dob = input("Date of birth (YYYY-MM-DD): ").strip()
+            dob = input("Fæðingardagur (YYYY-MM-DD): ").strip()
             try:
                 datetime.strptime(dob, "%Y-%m-%d")
                 return dob
             except ValueError:
-                print("Invalid date. Please use format YYYY-MM-DD.")
+                print("Invalid date. Vinsamlegast sláðu þetta inn svona YYYY-MM-DD.")
 
     def ask_for_valid_phone(self) -> str:
         """Ask until user enters a phone number with digits only."""
         while True:
-            phone = input("Phone number (digits only): ").strip()
+            phone = input("Símanúmer (Einungis tölustafir): ").strip()
             if phone.isdigit():
                 return phone
             else:
-                print("Phone number must contain digits only.")
+                print("Símanúmer getur bara innihaldið tölustafi.")
 
     # ---- FLOW For register new player  ----
 
     def create_player_flow(self) -> None:
         """Ask user for player info, check username availability and confirm."""
 
-        print("\nRegister player")
+        print("\nSkrá nýjan leikmann")
 
-        name = input("Player name: ").strip()
+        name = input("Nafn leikmans: ").strip()
         dob = self.ask_for_valid_date()
-        address = input("Home address: ").strip()
+        address = input("Heimilisfang: ").strip()
         phone_number = self.ask_for_valid_phone()
-        email = input("Email: ").strip()
-        link = input("Link: ").strip()
+        email = input("Tölvupóstur: ").strip()
+        link = input("Hlekkur: ").strip()
 
         # username: username available?
         while True:
-            username = input("Username: ").strip()
+            username = input("Notendanafn: ").strip()
 
             if hasattr(self.logic, "is_username_available"):
                 if self.logic.is_username_available(username):
                     break
                 else:
-                    print("This username is already taken. Please choose another one.")
+                    print("Þetta notendarnafn er nú þegar tekið. Vinsamlegast veldu annað.")
             else:
                 break
 
         # show summary and confirm
         print("\nConfirm registration:")
-        print(f"  Name:         {name}")
-        print(f"  Date of birth:{dob}")
-        print(f"  Address:      {address}")
-        print(f"  Phone:        {phone_number}")
+        print(f"  Nafn:         {name}")
+        print(f"  Fæðingrdagur:{dob}")
+        print(f"  Heimilisfang:      {address}")
+        print(f"  Símanúmer:        {phone_number}")
         print(f"  Email:        {email}")
-        print(f"  Link:         {link}")
-        print(f"  Username:     {username}")
+        print(f"  Hlekkur:         {link}")
+        print(f"  Notendanafn:     {username}")
 
-        confirm = input("Confirm registration (y/n): ").strip().lower()
+        confirm = input("Samþykkja skráningu (y/n): ").strip().lower()
 
         if confirm != "y":
-            print("Registration cancelled.")
+            print("Hætt við skráningu.")
             return
 
         # create Player and send to logic layer
@@ -102,4 +102,4 @@ class playerUI:
         print("Player registered.")
 
     def show_players(self) -> None:
-        print("\n[UI] Show players not implemented yet.")
+        print("\n.")
