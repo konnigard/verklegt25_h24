@@ -1,9 +1,0 @@
-Sjá Lið
-
-1) T1
-2) GenG
-3) Frosti
-4) Greinir
-
-b) tilbaka
-q) hætta

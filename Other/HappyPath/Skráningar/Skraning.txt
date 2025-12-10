@@ -1,9 +1,0 @@
-Skraning
-
-1) Skrá Lið
-2) Skrá Klúbb
-3) Skrá Leikmann
-4) Skrá Mót
-
-b) til baka
-q) Hætta
