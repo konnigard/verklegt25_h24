@@ -5,6 +5,7 @@ from LogicLayer.playerLogic import PlayerLogicClass
 from LogicLayer.tournamentLogic import TournamentLogicClass
 from LogicLayer.eventLogic import EventLogicClass
 from LogicLayer.tournamentTeamLogic import TournamentTeamLogicClass
+from DataLayer.dataLayerAPI import DataWrapper
 
 class LogicWrapper:
     def __init__(self):
