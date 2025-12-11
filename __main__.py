@@ -3,6 +3,7 @@ from UILayer.teamUIClass import TeamUI
 from UILayer.clubUIClass import ClubUI
 from UILayer.tournamentUIClass import TournamentUI
 from UILayer.eventUIClass import EventUI
+from UILayer.captainUIClass import Captain
 
 
 def show_see_menu(ui: playerUI) -> bool:
@@ -12,6 +13,7 @@ def show_see_menu(ui: playerUI) -> bool:
     uiClub = ClubUI()
     uiTournament = TournamentUI()
     uiEvent = EventUI()
+    
     while True:
         print("\nSee")
         print("1) See Teams")
@@ -111,6 +113,31 @@ def main() -> None:
         else:
             print("Invalid choice, try again.\n")
 
+def loginMenu():
+    while True:
+        uiCaptain = Captain()
+        print("************************")
+        print("      LOGIN MENU")
+        print("************************")
+        print("1 Admin")
+        print("2 Captain")
+        print("3 User")
+        print("************************")
+        print("q) Quit")
+        print("************************")
+
+        choice = input("Choose a Login: ")
+
+        if choice == "1":
+            main()
+        elif choice == "2":
+            uiCaptain.CaptainMenu()
+        elif choice == "3":
+            print("User Menu Not Implemented")
+        elif choice.upper() == "Q":
+            quit()
+        else: 
+            print("In valid choice please try again")
 
 if __name__ == "__main__":
-    main()
+    loginMenu()

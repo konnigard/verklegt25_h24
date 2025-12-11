@@ -5,11 +5,12 @@ from LogicLayer.playerLogic import PlayerLogicClass
 from LogicLayer.tournamentLogic import TournamentLogicClass
 from LogicLayer.eventLogic import EventLogicClass
 from LogicLayer.tournamentTeamLogic import TournamentTeamLogicClass
+from DataLayer.dataLayerAPI import DataWrapper
 
 class LogicWrapper:
     def __init__(self):
         datawrapper = DataWrapper()
-        self.teamLogic = TeamLogicClass( datawrapper )
+        self.teamLogic = TeamLogicClass(datawrapper)
         self.clubLogic = ClubLogicClass()
         self.playerLogic = PlayerLogicClass()
         self.tournamentLogic = TournamentLogicClass()
