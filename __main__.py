@@ -1,7 +1,8 @@
 from UILayer.playerUIClass import playerUI
 from UILayer.teamUIClass import TeamUI
 from UILayer.clubUIClass import ClubUI
-from UILayer.clubUIClass import ClubUI
+from UILayer.tournamentUIClass import TournamentUI
+from UILayer.eventUIClass import EventUI
 
 
 def show_see_menu(ui: playerUI) -> bool:
@@ -9,12 +10,15 @@ def show_see_menu(ui: playerUI) -> bool:
 
     uiTeam = TeamUI()
     uiClub = ClubUI()
+    uiTournament = TournamentUI()
+    uiEvent = EventUI()
     while True:
         print("\nSee")
         print("1) See Teams")
         print("2) See Clubs")
         print("3) See Players")
-        print("4) See Events")
+        print("4) See Tournaments")
+        print("5) See Events")
         print()
         print("b) Back")
         print("q) Quit")
@@ -22,13 +26,15 @@ def show_see_menu(ui: playerUI) -> bool:
         choice = input("Choose action: ").strip().lower()
 
         if choice == "1":
-            uiTeam.teamMenu()
+            uiTeam.showTeam()
         elif choice == "2":
             uiClub.showClubs()
         elif choice == "3":
             ui.show_players()
         elif choice == "4":
-            print("[See Events] not implemented yet")
+            uiTournament.read_tournaments()
+        elif choice == "5":
+            uiEvent.view_all_events()
         elif choice == "b":
             return True   # go back to main menu
         elif choice == "q":
@@ -40,14 +46,17 @@ def show_see_menu(ui: playerUI) -> bool:
 def show_register_menu(ui: playerUI) -> bool:
     """'Register' menu returns False if user wants to quit."""
     uiClub = ClubUI()
+    uiTeam = TeamUI()
+    uiTournament = TournamentUI()
+    uiEvent = EventUI()
     while True:
         print("\nRegister")
         print("1) Register player")
         print("2) Register team")
         print("3) Register tournament")
-        print("4) Register match result")
-        print("5) Create schedule")
-        print("6) Register club")
+        print("4) Register club")
+        print("5) Create event (schedule match)")
+        print("6) Record event score")
         print()
         print("b) Back")
         print("q) Quit")
@@ -57,15 +66,15 @@ def show_register_menu(ui: playerUI) -> bool:
         if choice == "1":
             ui.create_player_flow()
         elif choice == "2":
-            print("[Register team] not implemented yet")
+            uiTeam.createTeam()
         elif choice == "3":
-            print("[Register tournament] not implemented yet")
+            uiTournament.create_tournament()
         elif choice == "4":
-            print("[Register match result] not implemented yet")
-        elif choice == "5":
-            print("[Create schedule] not implemented yet")
-        elif choice == "6":
             uiClub.createClub()
+        elif choice == "5":
+            uiEvent.create_event()
+        elif choice == "6":
+            uiEvent.record_score()
         elif choice == "b":
             return True   # go back to main menu
         elif choice == "q":

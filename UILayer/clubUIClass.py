@@ -1,6 +1,7 @@
 #from file import class
 from Models.clubModel import Club
 from LogicLayer.logicLayerAPI import LogicWrapper
+from UILayer.sortingUtils import sort_by_name
 
 class ClubUI:
     def __init__(self):
@@ -9,16 +10,28 @@ class ClubUI:
     def createClub(self):
         """ Creates a new club by collecting user input """
         print("\n===== REGISTER NEW CLUB =====")
+        print("(Enter 'b' at any prompt to cancel)\n")
+
         clubname = input("Please enter the Clubname: ").strip()
-        teamlist = input("Please enter the Teamlist (comma-separated, or leave blank): ").strip()
+        if clubname.lower() == 'b':
+            print("Registration cancelled.")
+            return
+
         hometown = input("Please enter the Hometown: ").strip()
+        if hometown.lower() == 'b':
+            print("Registration cancelled.")
+            return
+
         country = input("Please enter the Country: ").strip()
+        if country.lower() == 'b':
+            print("Registration cancelled.")
+            return
 
         if not clubname or not hometown or not country:
             print("Error: Clubname, Hometown, and Country are required!")
             return
 
-        newClub = Club(clubname, hometown, country, teamlist)
+        newClub = Club(clubname, hometown, country)
         self.LogicWrapper.saveClubFromUI(newClub)
         print(f"\nClub '{clubname}' has been successfully registered!")
 
@@ -26,7 +39,22 @@ class ClubUI:
         """ Displays detailed information about a specific club """
         while True:
             print("\n===== CLUB DETAILS =====")
-            print(club)
+            print(f"Club name: {club.clubname}")
+            print(f"Hometown:  {club.hometown}")
+            print(f"Country:   {club.country}")
+
+            # Get all teams belonging to this club
+            all_teams = self.LogicWrapper.sendTeamInfoToUI()
+            club_teams = [team for team in all_teams if team.teamClub == club.clubname]
+
+            if club_teams:
+                # Sort teams by name using Icelandic sorting order
+                club_teams_sorted = sort_by_name(club_teams, 'teamName')
+                teams_display = ", ".join([team.teamName for team in club_teams_sorted])
+                print(f"Teams:     {teams_display}")
+            else:
+                print("Teams:     No teams registered")
+
             print()
             print("b) Back")
             print("q) Quit")
@@ -42,6 +70,10 @@ class ClubUI:
     def showClubs(self):
         """ Displays all registered clubs """
         clubList = self.LogicWrapper.sendClubInfoToUI()
+
+        # Sort clubs by name using Icelandic sorting order
+        if clubList:
+            clubList = sort_by_name(clubList, 'clubname')
 
         while True:
             print("\n===== REGISTERED CLUBS =====")

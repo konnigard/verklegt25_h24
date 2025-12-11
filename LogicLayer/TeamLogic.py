@@ -3,39 +3,25 @@ from DataLayer.dataLayerAPI import DataWrapper
 from Models.teamModel import Team
 
 class TeamLogicClass:
-    def __init__(self, datawrapper_inn: DataWrapper):
-        self.datawrapper: DataWrapper = datawrapper_inn  
+    def __init__(self):
+        self.DataWrapper = DataWrapper()
 
 
     def grabTeamData(self):
         """ Takes the info from the Data layer and make it printable for UI  """
         readTeams = self.datawrapper.loadAllTeams() #Takes what's in sendToLogic
         return readTeams
-    
-    def writeNewTeam(self, newTeam):
-        return DataWrapper.writeNewTeam(newTeam)
-    
-    def validateAndAddNewTeam(self, newTeam: Team) :
-        """ Checks to see if the team exist already """
-        # 1) Check if all fileds are valid 
-        
-        # 2) check if all uniqe things are uniqe 
-        #   - This will require reading all teams from file
-        allTeams: list[Team]= self.datawrapper.loadAllTeams()
-        for team in allTeams :
-            if team.teamName.upper() == newTeam.teamName.upper():
-                return "Team name already Exists"
-           #     # Here we should deal with the fact the name is not UNIQE
-            # if team.X == newTeam.X   # Some other check to do ??
-            
-        # 3) If all checks are OK, then call datawrapper and write new team to file 
-        #   - check if data call was successfull, 
-        #   - if not can we fix it or do we need to raise an exception to pas to the UI
-        
-        return self.writeNewTeam
-    
-    def compareUsernameToPlayerList(self, username, teamID):
-        #1) Check the team to see if player already exists
-        #2) Checks if the player with that user name exists
-        #3) Add to Team
-        pass
+
+    def saveNewTeam(self, team):
+        """ Saves a new team to the data layer """
+        self.DataWrapper.writeNewTeam(team)
+
+    def updateTeam(self, team):
+        """ Updates an existing team in the data layer """
+        self.DataWrapper.updateTeam(team)
+
+    def isTeamNameAvailable(self, teamName: str) -> bool:
+        """ Checks if a team name is available (not already taken) """
+        all_teams = self.DataWrapper.sendToLogic()
+        existing_team_names = [team.teamName.lower() for team in all_teams]
+        return teamName.lower() not in existing_team_names
