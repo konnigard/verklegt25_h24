@@ -39,3 +39,23 @@ class PlayerData:
         """Returns all players belonging to a specific team"""
         allPlayers = self.loadPlayer()
         return [player for player in allPlayers if player.teamName == teamName]
+
+    def updatePlayer(self, updatedPlayer: Player):
+        """Updates an existing player in the CSV database"""
+        players = self.loadPlayer()
+
+        with open('DataLayer/repository/PlayersDB.csv', mode='w', newline='') as dataBase:
+            csvWriter = csv.writer(dataBase, delimiter=';')
+
+            for player in players:
+                if player.username == updatedPlayer.username:
+                    # Write updated player
+                    csvWriter.writerow([updatedPlayer.name, updatedPlayer.dob,
+                                      updatedPlayer.address, updatedPlayer.phone_number,
+                                      updatedPlayer.email, updatedPlayer.link,
+                                      updatedPlayer.username, updatedPlayer.teamName])
+                else:
+                    # Write existing player unchanged
+                    csvWriter.writerow([player.name, player.dob, player.address,
+                                      player.phone_number, player.email, player.link,
+                                      player.username, player.teamName])

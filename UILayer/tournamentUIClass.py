@@ -197,8 +197,14 @@ class TournamentUI:
             print()
             print("1) View events for this tournament")
             print("2) View registered teams")
-            print("3) Register team for tournament")
-            print("4) Unregister team from tournament")
+
+            # Only show register/unregister options for Admin
+            from UILayer.sessionManager import get_session
+            session = get_session()
+            if session.is_admin():
+                print("3) Register team for tournament")
+                print("4) Unregister team from tournament")
+
             print("b) Back")
             print("q) Quit")
 
@@ -208,10 +214,12 @@ class TournamentUI:
                 self.show_tournament_events(tournament)
             elif choice == "2":
                 self.view_registered_teams(tournament)
-            elif choice == "3":
+            elif choice == "3" and session.is_admin():
                 self.register_team_for_tournament(tournament)
-            elif choice == "4":
+            elif choice == "4" and session.is_admin():
                 self.unregister_team_from_tournament(tournament)
+            elif (choice == "3" or choice == "4") and not session.is_admin():
+                print("You do not have permission to register/unregister teams.")
             elif choice == "b":
                 break
             elif choice == "q":
@@ -272,6 +280,15 @@ class TournamentUI:
 
     def register_team_for_tournament(self, tournament) -> None:
         """Interactive flow for registering teams for a tournament (supports comma-separated input)"""
+        from UILayer.sessionManager import get_session
+        session = get_session()
+
+        # Permission check - only Admin can register teams
+        if not session.is_admin():
+            print("\nYou do not have permission to register teams for tournaments.")
+            input("Press Enter to continue...")
+            return
+
         print("\n===== REGISTER TEAM FOR TOURNAMENT =====")
 
         # Get all teams
@@ -372,6 +389,15 @@ class TournamentUI:
 
     def unregister_team_from_tournament(self, tournament) -> None:
         """Interactive flow for unregistering a team from a tournament"""
+        from UILayer.sessionManager import get_session
+        session = get_session()
+
+        # Permission check - only Admin can unregister teams
+        if not session.is_admin():
+            print("\nYou do not have permission to unregister teams from tournaments.")
+            input("Press Enter to continue...")
+            return
+
         print("\n===== UNREGISTER TEAM FROM TOURNAMENT =====")
 
         # Get registered teams

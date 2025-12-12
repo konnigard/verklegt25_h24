@@ -158,17 +158,36 @@ class TeamUI:
                 print("\nTournaments: No tournaments registered")
 
             print("\n===========================")
-            print("1) Select/Change captain")
+
+            # Get session for permission checks
+            from UILayer.sessionManager import get_session
+            session = get_session()
+
+            # Show options based on permissions
+            if session.can_edit_player(team.teamName):
+                print("1) Select/Change captain")
+                print("2) Edit player")
+
             print("b) Back")
             print("q) Quit")
 
             choice = input("Choose action: ").strip().lower()
 
-            if choice == "1":
+            if choice == "1" and session.can_edit_player(team.teamName):
                 self.selectCaptain(team, players)
-                # Reload team to get updated captain
+                # Reload team from database to get updated captain information
                 teamList = self.LogicWrapper.sendTeamInfoToUI()
                 team = next((t for t in teamList if t.teamID == team.teamID), team)
+                # Reload players as well to ensure captain marking is correct
+                players = self.LogicWrapper.get_players_by_team(team.teamName)
+            elif choice == "1" and not session.can_edit_player(team.teamName):
+                print("You do not have permission to select captain.")
+            elif choice == "2" and session.can_edit_player(team.teamName):
+                self.edit_player_in_team(team, players)
+                # Reload players to reflect any changes
+                players = self.LogicWrapper.get_players_by_team(team.teamName)
+            elif choice == "2" and not session.can_edit_player(team.teamName):
+                print("You do not have permission to edit players.")
             elif choice == "b":
                 break
             elif choice == "q":
@@ -178,6 +197,15 @@ class TeamUI:
 
     def selectCaptain(self, team: Team, players: list):
         """ Allows selecting a captain for the team """
+        from UILayer.sessionManager import get_session
+        session = get_session()
+
+        # Permission check
+        if not session.can_edit_player(team.teamName):
+            print("\nYou do not have permission to select captain for this team.")
+            input("Press Enter to continue...")
+            return
+
         print("\n===== SELECT CAPTAIN =====")
 
         if not players:
@@ -206,14 +234,16 @@ class TeamUI:
                     # Remove captain
                     team.captain = ""
                     self.LogicWrapper.updateTeam(team)
-                    print("Captain removed.")
+                    print("\n✓ Captain removed successfully!")
+                    print("✓ Changes saved to database.")
                     input("\nPress Enter to continue...")
                     return
                 elif 1 <= idx <= len(players_sorted):
                     selected_player = players_sorted[idx - 1]
                     team.captain = selected_player.username
                     self.LogicWrapper.updateTeam(team)
-                    print(f"\n{selected_player.name} (@{selected_player.username}) is now the captain!")
+                    print(f"\n✓ {selected_player.name} (@{selected_player.username}) is now the captain!")
+                    print("✓ Changes saved to database.")
                     input("\nPress Enter to continue...")
                     return
             print("Invalid choice, try again.")
@@ -249,3 +279,35 @@ class TeamUI:
             #Lovely error messsage
             else:
                 print("Invalid choice, try again.")
+
+    def edit_player_in_team(self, team: Team, players: list):
+        """Select and edit a player from the team"""
+        from UILayer.playerUIClass import playerUI
+
+        print("\n===== SELECT PLAYER TO EDIT =====")
+
+        if not players:
+            print("No players in this team.")
+            input("\nPress Enter to continue...")
+            return
+
+        players_sorted = sort_by_name(players, 'name')
+
+        print("\nSelect player to edit:")
+        for idx, player in enumerate(players_sorted, start=1):
+            print(f"{idx}) {player.name} (@{player.username})")
+        print("b) Back")
+
+        while True:
+            choice = input("\nPlayer (number): ").strip()
+            if choice.lower() == "b":
+                return
+            if choice.isdigit():
+                idx = int(choice)
+                if 1 <= idx <= len(players_sorted):
+                    selected_player = players_sorted[idx - 1]
+                    # Use playerUI's edit flow
+                    player_ui = playerUI()
+                    player_ui.edit_player_flow(selected_player)
+                    return
+            print("Invalid choice, try again.")

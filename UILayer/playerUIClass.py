@@ -197,14 +197,26 @@ class playerUI:
 
     def show_player_details(self, player) -> None:
         """Display detailed information about a player"""
+        from UILayer.sessionManager import get_session
+        session = get_session()
+
         print("\n===== PLAYER DETAILS =====")
         print(f"Name:         {player.name}")
         print(f"Username:     {player.username}")
         print(f"Team:         {player.teamName}")
-        print(f"Date of Birth:{player.dob}")
-        print(f"Address:      {player.address}")
-        print(f"Phone:        {player.phone_number}")
-        print(f"Email:        {player.email}")
+
+        # Conditional display based on permissions
+        if session.should_hide_sensitive_fields(player.teamName):
+            print(f"Date of Birth: [HIDDEN]")
+            print(f"Address:       [HIDDEN]")
+            print(f"Phone:         [HIDDEN]")
+            print(f"Email:         [HIDDEN]")
+        else:
+            print(f"Date of Birth:{player.dob}")
+            print(f"Address:      {player.address}")
+            print(f"Phone:        {player.phone_number}")
+            print(f"Email:        {player.email}")
+
         print(f"Link:         {player.link}")
 
         # Get tournament history for this player's team
@@ -223,4 +235,110 @@ class playerUI:
             print("\nTournaments: No tournaments registered")
 
         print()
+        input("Press Enter to continue...")
+
+    def ask_for_valid_date_or_keep(self) -> str:
+        """Returns new date, empty string to keep current, or 'CANCEL' to cancel"""
+        while True:
+            dob = input("Date of birth (YYYY-MM-DD) (Enter=keep, 'b'=cancel): ").strip()
+            if dob.lower() == 'b':
+                return 'CANCEL'
+            if not dob:  # Empty = keep current
+                return ''
+            try:
+                datetime.strptime(dob, "%Y-%m-%d")
+                return dob
+            except ValueError:
+                print("Invalid date. Please use format YYYY-MM-DD.")
+
+    def ask_for_valid_phone_or_keep(self) -> str:
+        """Returns new phone, empty string to keep current, or 'CANCEL' to cancel"""
+        while True:
+            phone = input("Phone number (digits only) (Enter=keep, 'b'=cancel): ").strip()
+            if phone.lower() == 'b':
+                return 'CANCEL'
+            if not phone:  # Empty = keep current
+                return ''
+            if phone.isdigit():
+                return phone
+            else:
+                print("Phone number must contain digits only.")
+
+    def edit_player_flow(self, player: Player) -> None:
+        """Edit player details (only editable fields: dob, address, phone, email, link)"""
+        from UILayer.sessionManager import get_session
+        session = get_session()
+
+        # Permission check
+        if not session.can_edit_player(player.teamName):
+            print("\nYou do not have permission to edit this player.")
+            input("Press Enter to continue...")
+            return
+
+        print("\n===== EDIT PLAYER =====")
+        print(f"Editing: {player.name} (@{player.username})")
+        print("(Press Enter to keep current value, 'b' to cancel)\n")
+
+        # Date of birth
+        print(f"Current Date of Birth: {player.dob}")
+        new_dob = self.ask_for_valid_date_or_keep()
+        if new_dob == 'CANCEL':
+            print("Edit cancelled.")
+            return
+        if new_dob:
+            player.dob = new_dob
+
+        # Address
+        print(f"\nCurrent Address: {player.address}")
+        new_address = input("New Address (or Enter to keep): ").strip()
+        if new_address.lower() == 'b':
+            print("Edit cancelled.")
+            return
+        if new_address:
+            player.address = new_address
+
+        # Phone
+        print(f"\nCurrent Phone: {player.phone_number}")
+        new_phone = self.ask_for_valid_phone_or_keep()
+        if new_phone == 'CANCEL':
+            print("Edit cancelled.")
+            return
+        if new_phone:
+            player.phone_number = new_phone
+
+        # Email
+        print(f"\nCurrent Email: {player.email}")
+        new_email = input("New Email (or Enter to keep): ").strip()
+        if new_email.lower() == 'b':
+            print("Edit cancelled.")
+            return
+        if new_email:
+            player.email = new_email
+
+        # Link
+        print(f"\nCurrent Link: {player.link}")
+        new_link = input("New Link (or Enter to keep): ").strip()
+        if new_link.lower() == 'b':
+            print("Edit cancelled.")
+            return
+        if new_link:
+            player.link = new_link
+
+        # Confirm changes
+        print("\n===== CONFIRM CHANGES =====")
+        print(f"Name:         {player.name} (NOT EDITABLE)")
+        print(f"Username:     {player.username} (NOT EDITABLE)")
+        print(f"Date of Birth: {player.dob}")
+        print(f"Address:       {player.address}")
+        print(f"Phone:         {player.phone_number}")
+        print(f"Email:         {player.email}")
+        print(f"Link:          {player.link}")
+
+        confirm = input("\nSave changes? (y/n): ").strip().lower()
+        if confirm == 'y':
+            self.logic.update_player(player)
+            print("Player updated successfully.")
+        else:
+            print("Changes discarded.")
+
         input("Press Enter to continue...")

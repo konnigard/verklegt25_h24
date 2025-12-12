@@ -54,6 +54,11 @@ class DataWrapper:
     def readPlayersByTeam(self, teamName: str) -> list:
         return self.PlayerData.loadPlayersByTeam(teamName)
 
+    def updatePlayer(self, player: Player) -> bool:
+        """Updates an existing player in the CSV database"""
+        self.PlayerData.updatePlayer(player)
+        return True
+
 ##############################################################
 
 ####  Functions for Clubs  ##################################

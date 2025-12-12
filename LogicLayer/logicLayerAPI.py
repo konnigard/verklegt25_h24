@@ -105,6 +105,10 @@ class LogicWrapper:
         """Checks if a username is available (not already taken)"""
         return self.playerLogic.isUsernameAvailable(username)
 
+    def update_player(self, player):
+        """Updates an existing player through the logic layer"""
+        self.playerLogic.updatePlayer(player)
+
     def register_team_for_tournament(self, tournamentName: str, teamName: str):
         """Registers a team for a tournament"""
         self.tournamentTeamLogic.registerTeam(tournamentName, teamName)

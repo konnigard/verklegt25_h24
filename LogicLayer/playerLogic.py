@@ -24,3 +24,7 @@ class PlayerLogicClass:
         all_players = self.DataWrapper.readPlayers()
         existing_usernames = [player.username.lower() for player in all_players]
         return username.lower() not in existing_usernames
+
+    def updatePlayer(self, player):
+        """ Updates an existing player through the data layer """
+        self.DataWrapper.updatePlayer(player)
