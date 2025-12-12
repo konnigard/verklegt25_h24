@@ -7,7 +7,7 @@ class ClubUI:
     def __init__(self):
         self.LogicWrapper = LogicWrapper()
 
-    def createClub(self):
+    def create_club(self):
         """ Creates a new club by collecting user input """
         print("\n===== REGISTER NEW CLUB =====")
         print("(Enter 'b' at any prompt to cancel)\n")
@@ -32,10 +32,10 @@ class ClubUI:
             return
 
         newClub = Club(clubname, hometown, country)
-        self.LogicWrapper.saveClubFromUI(newClub)
+        self.LogicWrapper.save_club_from_ui(newClub)
         print(f"\nClub '{clubname}' has been successfully registered!")
 
-    def showClubDetails(self, club: Club):
+    def show_club_details(self, club: Club):
         """ Displays detailed information about a specific club """
         while True:
             print("\n===== CLUB DETAILS =====")
@@ -44,7 +44,7 @@ class ClubUI:
             print(f"Country:   {club.country}")
 
             # Get all teams belonging to this club
-            all_teams = self.LogicWrapper.sendTeamInfoToUI()
+            all_teams = self.LogicWrapper.send_team_info_to_ui()
             club_teams = [team for team in all_teams if team.teamClub == club.clubname]
 
             if club_teams:
@@ -67,9 +67,9 @@ class ClubUI:
             else:
                 print("Invalid choice, try again.")
 
-    def showClubs(self):
+    def show_clubs(self):
         """ Displays all registered clubs """
-        clubList = self.LogicWrapper.sendClubInfoToUI()
+        clubList = self.LogicWrapper.send_club_info_to_ui()
 
         # Sort clubs by name using Icelandic sorting order
         if clubList:
@@ -101,7 +101,7 @@ class ClubUI:
             else:
                 print("Invalid choice, try again.")
 
-    def clubMenu(self):
+    def club_menu(self):
         """ Main menu for club operations """
         while True:
             print("\n===== CLUB MENU =====")

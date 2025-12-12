@@ -104,7 +104,7 @@ class playerUI:
                 print(f"Username '{username}' is already taken. Please choose another one.")
 
         # Select team
-        teams = self.logic.sendTeamInfoToUI()
+        teams = self.logic.send_team_info_to_ui()
         if not teams:
             print("\nNo teams available. Please register a team first before registering players.")
             input("Press Enter to continue...")
@@ -163,7 +163,7 @@ class playerUI:
 
     def show_players(self) -> None:
         """Displays all registered players"""
-        playerList = self.logic.sendPlayerInfoToUI()
+        playerList = self.logic.send_player_info_to_ui()
 
         # Sort players by name using Icelandic sorting order
         if playerList:

@@ -29,9 +29,9 @@ def show_see_menu(ui: playerUI) -> str:
         choice = input("Choose action: ").strip().lower()
 
         if choice == "1":
-            uiTeam.showTeam()
+            uiTeam.show_team()
         elif choice == "2":
-            uiClub.showClubs()
+            uiClub.show_clubs()
         elif choice == "3":
             ui.show_players()
         elif choice == "4":
@@ -77,7 +77,7 @@ def show_register_menu(ui: playerUI) -> str:
         elif choice == "3":
             uiTournament.create_tournament()
         elif choice == "4":
-            uiClub.createClub()
+            uiClub.create_club()
         elif choice == "5":
             uiEvent.create_event()
         elif choice == "6":

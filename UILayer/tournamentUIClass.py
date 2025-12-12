@@ -240,7 +240,7 @@ class TournamentUI:
             return
 
         # Get all team objects
-        all_teams = self.logic.sendTeamInfoToUI()
+        all_teams = self.logic.send_team_info_to_ui()
 
         # Filter to get only registered teams with full details
         registered_teams = [team for team in all_teams if team.teamName in registered_team_names]
@@ -292,7 +292,7 @@ class TournamentUI:
         print("\n===== REGISTER TEAM FOR TOURNAMENT =====")
 
         # Get all teams
-        all_teams = self.logic.sendTeamInfoToUI()
+        all_teams = self.logic.send_team_info_to_ui()
         if not all_teams:
             print("No teams available. Please create teams first.")
             input("\nPress Enter to continue...")
@@ -560,4 +560,3 @@ class TournamentUI:
         print("Result recorded.")
 
 
-## ATH VANTAR AÐ GETA VALIÐ LIÐ SEM KEPPA GETA GERT LEIKJADAGSKRÁNA OG SIÐAN 
