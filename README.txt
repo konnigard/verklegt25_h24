@@ -28,3 +28,6 @@ a computer
 ################################################################################
 Login:
 The system doesn't have a login persay but if you wish to use the Captain window you'll need to know the username of the captain and which team he belongs to.
+################################################################################
+And that's all folks!
+GLHF!
