@@ -15,7 +15,7 @@ class ClubData:
         """ Reads the CSV to find all clubs """
         clubList = []
         try:
-            with open('DataLayer/repository/ClubDB.csv', mode='r', encoding= 'utf-8') as dataBase:
+            with open('DataLayer/repository/ClubDB.csv', mode='r', encoding= 'latin-1') as dataBase:
                 csv_DB = csv.reader(dataBase, delimiter=';')
 
                 for info in csv_DB:
