@@ -75,7 +75,7 @@ class AuthUI:
             return False
 
         # Step 2: Get all teams
-        teams = self.logic.sendTeamInfoToUI()
+        teams = self.logic.send_team_info_to_ui()
 
         if not teams:
             print("\nNo teams available. Cannot login as Captain.")

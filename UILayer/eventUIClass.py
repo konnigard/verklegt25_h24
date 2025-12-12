@@ -111,7 +111,7 @@ class EventUI:
             return
 
         # Get all teams and filter to only registered teams
-        all_teams = self.logic.sendTeamInfoToUI()
+        all_teams = self.logic.send_team_info_to_ui()
         registered_team_objects = [t for t in all_teams if t.teamName in registered_teams]
 
         # Get unfinished events for THIS TOURNAMENT to check which teams are already scheduled

@@ -5,12 +5,12 @@ class PlayerData:
     def __init__(self):
         pass
 
-    def savePlayer(self, player: Player):
+    def save_player(self, player: Player):
       with open('DataLayer/repository/PlayersDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             csvWriter.writerow([player.name, player.dob, player.address, player.phone_number, player.email, player.link, player.username, player.teamName])  
 
-    def loadPlayer(self) -> list[Player]:
+    def load_player(self) -> list[Player]:
         playerList = []
         try:
             with open('DataLayer/repository/PlayersDB.csv', mode='r') as dataBase:
@@ -35,14 +35,14 @@ class PlayerData:
 
         return playerList
 
-    def loadPlayersByTeam(self, teamName: str) -> list[Player]:
+    def load_players_by_team(self, teamName: str) -> list[Player]:
         """Returns all players belonging to a specific team"""
-        allPlayers = self.loadPlayer()
+        allPlayers = self.load_player()
         return [player for player in allPlayers if player.teamName == teamName]
 
-    def updatePlayer(self, updatedPlayer: Player):
+    def update_player(self, updatedPlayer: Player):
         """Updates an existing player in the CSV database"""
-        players = self.loadPlayer()
+        players = self.load_player()
 
         with open('DataLayer/repository/PlayersDB.csv', mode='w', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')

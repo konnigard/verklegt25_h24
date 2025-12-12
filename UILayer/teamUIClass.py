@@ -7,14 +7,14 @@ class TeamUI:
     def __init__(self):
         self.LogicWrapper = LogicWrapper()
 
-    def createTeam(self):
+    def create_team(self):
         """ Creates new team through input from user """
 
         print("\nRegister New Team")
         print("(Enter 'b' at any prompt to cancel)\n")
 
         # Check if clubs exist
-        clubs = self.LogicWrapper.sendClubInfoToUI()
+        clubs = self.LogicWrapper.send_club_info_to_ui()
         if not clubs:
             print("\nCreate the CLUB first!")
             input("Press Enter to continue...")
@@ -68,12 +68,12 @@ class TeamUI:
 
         # Create Team and send to logic layer (TeamID will be auto-generated)
         newTeam: Team = Team(teamID="", teamName=teamName, teamClub=clubName)
-        self.LogicWrapper.addNewTeam(newTeam)
+        self.LogicWrapper.add_new_team(newTeam)
         print("Team registered successfully.") 
     
-    def showTeam(self):
+    def show_team(self):
         """ Shows a list of teams """
-        teamList = self.LogicWrapper.sendTeamInfoToUI()
+        teamList = self.LogicWrapper.send_team_info_to_ui()
 
         # Sort teams by name using Icelandic sorting order
         if teamList:
@@ -111,7 +111,7 @@ class TeamUI:
                 except ValueError:
                     print("Invalid choice, try again.")
 
-    def showTeamDetails(self, team: Team):
+    def show_team_details(self, team: Team):
         """ Shows detailed information about a team including its players and captain """
         while True:
             print("\n===== TEAM DETAILS =====")
@@ -176,7 +176,7 @@ class TeamUI:
             if choice == "1" and session.can_edit_player(team.teamName):
                 self.selectCaptain(team, players)
                 # Reload team from database to get updated captain information
-                teamList = self.LogicWrapper.sendTeamInfoToUI()
+                teamList = self.LogicWrapper.send_team_info_to_ui()
                 team = next((t for t in teamList if t.teamID == team.teamID), team)
                 # Reload players as well to ensure captain marking is correct
                 players = self.LogicWrapper.get_players_by_team(team.teamName)
@@ -195,7 +195,7 @@ class TeamUI:
             else:
                 print("Invalid choice, try again.")
 
-    def selectCaptain(self, team: Team, players: list):
+    def select_captain(self, team: Team, players: list):
         """ Allows selecting a captain for the team """
         from UILayer.sessionManager import get_session
         session = get_session()
@@ -233,7 +233,7 @@ class TeamUI:
                 if idx == 0:
                     # Remove captain
                     team.captain = ""
-                    self.LogicWrapper.updateTeam(team)
+                    self.LogicWrapper.update_team(team)
                     print("\n✓ Captain removed successfully!")
                     print("✓ Changes saved to database.")
                     input("\nPress Enter to continue...")
@@ -241,7 +241,7 @@ class TeamUI:
                 elif 1 <= idx <= len(players_sorted):
                     selected_player = players_sorted[idx - 1]
                     team.captain = selected_player.username
-                    self.LogicWrapper.updateTeam(team)
+                    self.LogicWrapper.update_team(team)
                     print(f"\n✓ {selected_player.name} (@{selected_player.username}) is now the captain!")
                     print("✓ Changes saved to database.")
                     input("\nPress Enter to continue...")
@@ -249,7 +249,7 @@ class TeamUI:
             print("Invalid choice, try again.")
  
     
-    def teamMenu(self):
+    def team_menu(self):
         """ Team Menu """
 
         while True:

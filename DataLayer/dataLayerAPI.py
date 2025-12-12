@@ -21,108 +21,108 @@ class DataWrapper:
         self.TournamentTeamData = TournamentTeamData()
     
 ####  Functions for Teams  ##################################
-    def loadAllTeams(self) -> list[Team]:
+    def load_all_teams(self) -> list[Team]:
         '''Returns all teams or empty list if no teams exist'''
-        teamList = self.TeamData.readAllTeams()
+        teamList = self.TeamData.read_all_teams()
         return teamList 
 
-    def sendToLogic(self): #Takes what readAllTeams returns and sends it to logic layer
-        teamList = self.TeamData.readAllTeams()
+    def send_to_logic(self): #Takes what read_all_teams returns and sends it to logic layer
+        teamList = self.TeamData.read_all_teams()
         return teamList
     
-    def LoadTeamByID(self, teamID ) -> Team:
+    def Load_team_by_id(self, teamID ) -> Team:
         t : Team = Team(teamID=teamID, teamName="smuu", teamClub="Plee")
         return t
     
-    def writeNewTeam(self, team: Team):
+    def write_new_team(self, team: Team):
         """Saves a new team to the CSV database"""
-        self.TeamData.saveNewTeam(team)
+        self.TeamData.save_new_team(team)
 
-    def updateTeam(self, team: Team) -> bool:
+    def update_team(self, team: Team) -> bool:
         """Updates an existing team in the CSV database"""
-        self.TeamData.updateTeam(team)
+        self.TeamData.update_team(team)
         return True
 ##############################################################
 
 ####  Functions for Players  ##################################
-    def writePlayer(self, player: Player):
-        return self.PlayerData.savePlayer(player)
+    def write_player(self, player: Player):
+        return self.PlayerData.save_player(player)
 
-    def readPlayers(self) -> list:
-        return self.PlayerData.loadPlayer()
+    def read_players(self) -> list:
+        return self.PlayerData.load_player()
 
-    def readPlayersByTeam(self, teamName: str) -> list:
-        return self.PlayerData.loadPlayersByTeam(teamName)
+    def read_players_by_team(self, teamName: str) -> list:
+        return self.PlayerData.load_players_by_team(teamName)
 
-    def updatePlayer(self, player: Player) -> bool:
+    def update_player(self, player: Player) -> bool:
         """Updates an existing player in the CSV database"""
-        self.PlayerData.updatePlayer(player)
+        self.PlayerData.update_player(player)
         return True
 
 ##############################################################
 
 ####  Functions for Clubs  ##################################
-    def getClubsForLogic(self): #Takes what readClubs returns and sends it to logic layer
-        clubList = self.ClubData.readClubs()
+    def get_clubs_for_logic(self): #Takes what read_clubs returns and sends it to logic layer
+        clubList = self.ClubData.read_clubs()
         return clubList
 
-    def saveClubToData(self, club):
-        self.ClubData.writeClub(club)
+    def save_club_to_data(self, club):
+        self.ClubData.write_club(club)
     
 ##############################################################    
 
 ####  Functions for Tournaments  #############################
-    def readTournaments(self):
-        return self.TournamentData.loadTournament()
+    def read_tournaments(self):
+        return self.TournamentData.load_tournament()
 
-    def writeTournaments(self, tournament: Tournament):
-        return self.TournamentData.saveTournament(tournament)
+    def write_tournaments(self, tournament: Tournament):
+        return self.TournamentData.save_tournament(tournament)
 ##############################################################
 
 ####  Functions for Events  ##################################
     def writeEvent(self, event: Event):
         """Saves an event to the CSV database"""
-        return self.EventData.saveEvent(event)
+        return self.EventData.save_event(event)
 
-    def readEvents(self) -> list[Event]:
+    def read_events(self) -> list[Event]:
         """Returns all events"""
-        return self.EventData.loadEvents()
+        return self.EventData.load_events()
 
-    def readEventsByTournament(self, tournamentName: str) -> list[Event]:
+    def read_events_by_tournament(self, tournamentName: str) -> list[Event]:
         """Returns events for a specific tournament"""
-        return self.EventData.loadEventsByTournament(tournamentName)
+        return self.EventData.load_events_by_tournament(tournamentName)
 
-    def updateEventScore(self, eventID: str, homeScore: int, awayScore: int):
+    def update_event_score(self, eventID: str, homeScore: int, awayScore: int):
         """Updates the score for an event"""
-        return self.EventData.updateEventScore(eventID, homeScore, awayScore)
+        return self.EventData.update_event_score(eventID, homeScore, awayScore)
 
-    def checkTeamConflict(self, teamName: str, eventDate: str, eventTime: str) -> tuple[bool, str]:
+    def check_team_conflict(self, teamName: str, eventDate: str, eventTime: str) -> tuple[bool, str]:
         """Checks if a team has a scheduling conflict"""
-        return self.EventData.checkTeamConflict(teamName, eventDate, eventTime)
+        return self.EventData.check_team_conflict(teamName, eventDate, eventTime)
 
-    def checkTeamEliminated(self, teamName: str, tournamentName: str) -> tuple[bool, str]:
+    def check_team_eliminated(self, teamName: str, tournamentName: str) -> tuple[bool, str]:
         """Checks if a team has been eliminated from a tournament"""
-        return self.EventData.checkTeamEliminated(teamName, tournamentName)
+        return self.EventData.check_ream_eliminated(teamName, tournamentName)
 ##############################################################
 
 ####  Functions for Tournament Team Registrations  ##########
-    def registerTeamForTournament(self, tournamentTeam: TournamentTeam) -> None:
+    def register_team_for_tournament(self, tournamentTeam: TournamentTeam) -> None:
         """Registers a team for a tournament"""
-        self.TournamentTeamData.registerTeam(tournamentTeam)
+        self.TournamentTeamData.register_team(tournamentTeam)
 
-    def getTeamsForTournament(self, tournamentName: str) -> list[str]:
+    def get_teams_for_tournament(self, tournamentName: str) -> list[str]:
         """Returns list of team names registered for a tournament"""
-        return self.TournamentTeamData.getTeamsForTournament(tournamentName)
+        return self.TournamentTeamData.get_teams_for_tournament(tournamentName)
 
-    def getTournamentsForTeam(self, teamName: str) -> list[str]:
+    def get_tournaments_for_team(self, teamName: str) -> list[str]:
         """Returns list of tournaments a team is registered for"""
-        return self.TournamentTeamData.getTournamentsForTeam(teamName)
+        return self.TournamentTeamData.get_tournaments_for_team(teamName)
 
-    def isTeamRegisteredForTournament(self, tournamentName: str, teamName: str) -> bool:
+    def is_team_registered_for_tournament(self, tournamentName: str, teamName: str) -> bool:
         """Checks if a team is registered for a tournament"""
-        return self.TournamentTeamData.isTeamRegistered(tournamentName, teamName)
+        return self.TournamentTeamData.is_team_registered(tournamentName, teamName)
 
-    def unregisterTeamFromTournament(self, tournamentName: str, teamName: str) -> None:
+    def unregister_team_from_tournament(self, tournamentName: str, teamName: str) -> None:
         """Removes a team's registration from a tournament"""
-        self.TournamentTeamData.unregisterTeam(tournamentName, teamName)
+        self.TournamentTeamData.unregister_team(tournamentName, teamName)
 ##############################################################

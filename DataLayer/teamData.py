@@ -5,9 +5,9 @@ class TeamData:
     def __init__(self):
         pass
 
-    def _getNextTeamID(self) -> str:
+    def _get_next_team_id(self) -> str:
         """Generates the next available TeamID"""
-        teams = self.readAllTeams()
+        teams = self.read_all_teams()
         if not teams:
             return "1"
 
@@ -15,17 +15,17 @@ class TeamData:
         max_id = max(int(team.teamID) for team in teams)
         return str(max_id + 1)
 
-    def saveNewTeam(self, newTeam: Team):
+    def save_new_team(self, newTeam: Team):
         # Auto-generate TeamID if not set or empty
         if not newTeam.teamID:
-            newTeam.teamID = self._getNextTeamID()
+            newTeam.teamID = self._get_next_team_id()
 
         with open('DataLayer/repository/TeamDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             # Write team with captain field (username)
             csvWriter.writerow([newTeam.teamID, newTeam.teamName, newTeam.teamClub, newTeam.captain])
 
-    def readAllTeams(self) -> list[Team]:
+    def read_all_teams(self) -> list[Team]:
         """ Reads the CSV to find the teams """
 
         #Creates Emptylist that gets added to in the for loop
@@ -52,9 +52,9 @@ class TeamData:
         return teamList
     #name, club, players
 
-    def updateTeam(self, updatedTeam: Team):
+    def update_team(self, updatedTeam: Team):
         """ Updates an existing team in the CSV """
-        teams = self.readAllTeams()
+        teams = self.read_all_teams()
 
         with open('DataLayer/repository/TeamDB.csv', mode='w', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
@@ -67,7 +67,7 @@ class TeamData:
                     # Write the existing team unchanged
                     csvWriter.writerow([team.teamID, team.teamName, team.teamClub, team.captain])
 
-    def checksTeamName(self):
+    def checks_team_name(self):
         teamNameList = []
         with open('DataLayer/repository/TeamDB.csv', mode='r') as dataBase:
             csvDB = csv.reader(dataBase, delimiter= ';')
