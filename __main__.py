@@ -73,7 +73,7 @@ def show_register_menu(ui: playerUI) -> str:
         if choice == "1":
             ui.create_player_flow()
         elif choice == "2":
-            uiTeam.createTeam()
+            uiTeam.create_team()
         elif choice == "3":
             uiTournament.create_tournament()
         elif choice == "4":

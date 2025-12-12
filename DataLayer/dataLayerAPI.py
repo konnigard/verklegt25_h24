@@ -102,7 +102,7 @@ class DataWrapper:
 
     def check_team_eliminated(self, teamName: str, tournamentName: str) -> tuple[bool, str]:
         """Checks if a team has been eliminated from a tournament"""
-        return self.EventData.check_ream_eliminated(teamName, tournamentName)
+        return self.EventData.check_team_eliminated(teamName, tournamentName)
 ##############################################################
 
 ####  Functions for Tournament Team Registrations  ##########
