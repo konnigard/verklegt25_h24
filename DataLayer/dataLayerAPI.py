@@ -21,20 +21,20 @@ class DataWrapper:
         self.TournamentTeamData = TournamentTeamData()
     
 ####  Functions for Teams  ##################################
-    def loadAllTeams(self) -> list[Team]:
+    def load_all_teams(self) -> list[Team]:
         '''Returns all teams or empty list if no teams exist'''
         teamList = self.TeamData.read_all_teams()
         return teamList 
 
-    def sendToLogic(self): #Takes what read_all_teams returns and sends it to logic layer
+    def send_to_logic(self): #Takes what read_all_teams returns and sends it to logic layer
         teamList = self.TeamData.read_all_teams()
         return teamList
     
-    def LoadTeamByID(self, teamID ) -> Team:
+    def Load_team_by_id(self, teamID ) -> Team:
         t : Team = Team(teamID=teamID, teamName="smuu", teamClub="Plee")
         return t
     
-    def writeNewTeam(self, team: Team):
+    def write_new_team(self, team: Team):
         """Saves a new team to the CSV database"""
         self.TeamData.save_new_team(team)
 
@@ -45,13 +45,13 @@ class DataWrapper:
 ##############################################################
 
 ####  Functions for Players  ##################################
-    def writePlayer(self, player: Player):
+    def write_player(self, player: Player):
         return self.PlayerData.save_player(player)
 
-    def readPlayers(self) -> list:
+    def read_players(self) -> list:
         return self.PlayerData.load_player()
 
-    def readPlayersByTeam(self, teamName: str) -> list:
+    def read_players_by_team(self, teamName: str) -> list:
         return self.PlayerData.load_players_by_team(teamName)
 
     def update_player(self, player: Player) -> bool:
@@ -62,20 +62,20 @@ class DataWrapper:
 ##############################################################
 
 ####  Functions for Clubs  ##################################
-    def getClubsForLogic(self): #Takes what read_clubs returns and sends it to logic layer
-        clubList = self.ClubData.read_Clubs()
+    def get_clubs_for_logic(self): #Takes what read_clubs returns and sends it to logic layer
+        clubList = self.ClubData.read_clubs()
         return clubList
 
-    def saveClubToData(self, club):
+    def save_club_to_data(self, club):
         self.ClubData.write_club(club)
     
 ##############################################################    
 
 ####  Functions for Tournaments  #############################
-    def readTournaments(self):
+    def read_tournaments(self):
         return self.TournamentData.load_tournament()
 
-    def writeTournaments(self, tournament: Tournament):
+    def write_tournaments(self, tournament: Tournament):
         return self.TournamentData.save_tournament(tournament)
 ##############################################################
 
@@ -84,11 +84,11 @@ class DataWrapper:
         """Saves an event to the CSV database"""
         return self.EventData.save_event(event)
 
-    def readEvents(self) -> list[Event]:
+    def read_events(self) -> list[Event]:
         """Returns all events"""
         return self.EventData.load_events()
 
-    def readEventsByTournament(self, tournamentName: str) -> list[Event]:
+    def read_events_by_tournament(self, tournamentName: str) -> list[Event]:
         """Returns events for a specific tournament"""
         return self.EventData.load_events_by_tournament(tournamentName)
 

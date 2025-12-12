@@ -8,8 +8,8 @@ class EventLogicClass:
 
     def grab_event_data(self):
         """Takes the info from the Data layer and makes it available for UI"""
-        readEvents = self.DataWrapper.read_events()
-        return readEvents
+        read_events = self.DataWrapper.read_events()
+        return read_events
 
     def grab_events_by_tournament(self, tournamentName: str):
         """Gets events for a specific tournament"""

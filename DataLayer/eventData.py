@@ -5,7 +5,7 @@ class EventData:
     def __init__(self):
         pass
 
-    def _getNextEventID(self) -> str:
+    def _get_next_event_id(self) -> str:
         """Generates the next available EventID"""
         events = self.load_events()
         if not events:
@@ -19,7 +19,7 @@ class EventData:
         """Saves an event to the CSV database"""
         # Auto-generate EventID if not set or empty
         if not event.eventID:
-            event.eventID = self._getNextEventID()
+            event.eventID = self._get_next_event_id()
 
         with open('DataLayer/repository/EventDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')

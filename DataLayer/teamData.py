@@ -5,7 +5,7 @@ class TeamData:
     def __init__(self):
         pass
 
-    def _getNextTeamID(self) -> str:
+    def _get_next_team_id(self) -> str:
         """Generates the next available TeamID"""
         teams = self.read_all_teams()
         if not teams:
@@ -18,7 +18,7 @@ class TeamData:
     def save_new_team(self, newTeam: Team):
         # Auto-generate TeamID if not set or empty
         if not newTeam.teamID:
-            newTeam.teamID = self._getNextTeamID()
+            newTeam.teamID = self._get_next_team_id()
 
         with open('DataLayer/repository/TeamDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
