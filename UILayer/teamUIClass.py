@@ -105,7 +105,7 @@ class TeamUI:
                 try:
                     teamIndex = int(choice) - 1
                     if 0 <= teamIndex < len(teamList):
-                        self.showTeamDetails(teamList[teamIndex])
+                        self.showteam_details(teamList[teamIndex])
                     else:
                         print("Invalid team number, try again.")
                 except ValueError:
