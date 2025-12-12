@@ -386,9 +386,11 @@ Axel
 Þorbjörn (Remote) 
 
 <h3> Staða verkefnis: </h3>
+
 Hænsna skref í foritun.
 
 <h3> Hvað var gert í gær? </h3>
+
 Byrjað var að forita á Öllum lögum
 
 
@@ -397,9 +399,19 @@ Byrjað var að forita á Öllum lögum
 
 <h3> Mæting: </h3> 
 
+Axel
+
+Guðrún
+
+Hákon
+
 <h3> Staða verkefnis: </h3>
 
+Byrjað að vinna í að lesa úr skrám og skrifa í skrá.
+
 <h3> Hvað var gert í gær? </h3>
+
+Unnið var að því að vinna í að skrifa frá skjali og lært var á Circular Inport Error. :D
 
 
 
