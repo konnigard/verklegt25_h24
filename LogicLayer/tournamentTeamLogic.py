@@ -9,10 +9,10 @@ class TournamentTeamLogicClass:
         self.DataWrapper = DataWrapper()
         self.TournamentLogic = TournamentLogicClass()
 
-    def registerTeam(self, tournamentName: str, teamName: str) -> None:
+    def register_team(self, tournamentName: str, teamName: str) -> None:
         """Registers a team for a tournament"""
         # Get the tournament details for the new registration
-        newTournament = self.TournamentLogic.getTournamentByName(tournamentName)
+        newTournament = self.TournamentLogic.get_tournament_by_name(tournamentName)
         if not newTournament:
             raise ValueError(f"Tournament '{tournamentName}' not found")
 
@@ -20,11 +20,11 @@ class TournamentTeamLogicClass:
         newStartDate = datetime.strptime(newTournament.startDate, "%Y-%m-%d")
 
         # Get all tournaments this team is already registered for
-        registeredTournaments = self.DataWrapper.getTournamentsForTeam(teamName)
+        registeredTournaments = self.DataWrapper.get_tournaments_for_team(teamName)
 
         # Check for date conflicts
         for regTournamentName in registeredTournaments:
-            regTournament = self.TournamentLogic.getTournamentByName(regTournamentName)
+            regTournament = self.TournamentLogic.get_tournament_by_name(regTournamentName)
             if regTournament:
                 regStartDate = datetime.strptime(regTournament.startDate, "%Y-%m-%d")
                 regEndDate = datetime.strptime(regTournament.endDate, "%Y-%m-%d")
@@ -39,28 +39,28 @@ class TournamentTeamLogicClass:
 
         # If no conflicts, proceed with registration
         tournamentTeam = TournamentTeam(tournamentName, teamName)
-        self.DataWrapper.registerTeamForTournament(tournamentTeam)
+        self.DataWrapper.register_team_for_tournament(tournamentTeam)
 
-    def getTeamsForTournament(self, tournamentName: str) -> list[str]:
+    def get_teams_for_tournament(self, tournamentName: str) -> list[str]:
         """Returns list of team names registered for a tournament"""
-        return self.DataWrapper.getTeamsForTournament(tournamentName)
+        return self.DataWrapper.get_teams_for_tournament(tournamentName)
 
-    def getTournamentsForTeam(self, teamName: str) -> list[str]:
+    def get_tournaments_for_team(self, teamName: str) -> list[str]:
         """Returns list of tournaments a team is registered for"""
-        return self.DataWrapper.getTournamentsForTeam(teamName)
+        return self.DataWrapper.get_tournaments_for_team(teamName)
 
-    def isTeamRegistered(self, tournamentName: str, teamName: str) -> bool:
+    def is_team_registered(self, tournamentName: str, teamName: str) -> bool:
         """Checks if a team is registered for a tournament"""
-        return self.DataWrapper.isTeamRegisteredForTournament(tournamentName, teamName)
+        return self.DataWrapper.is_team_registered_for_tournament(tournamentName, teamName)
 
-    def unregisterTeam(self, tournamentName: str, teamName: str) -> None:
+    def unregister_team(self, tournamentName: str, teamName: str) -> None:
         """Removes a team's registration from a tournament"""
-        self.DataWrapper.unregisterTeamFromTournament(tournamentName, teamName)
+        self.DataWrapper.unregister_team_from_tournament(tournamentName, teamName)
 
-    def hasDateConflict(self, tournamentName: str, teamName: str) -> bool:
+    def has_date_conflict(self, tournamentName: str, teamName: str) -> bool:
         """Checks if a team has a date conflict with the specified tournament"""
         # Get the tournament details for the new registration
-        newTournament = self.TournamentLogic.getTournamentByName(tournamentName)
+        newTournament = self.TournamentLogic.get_tournament_by_name(tournamentName)
         if not newTournament:
             return False
 
@@ -68,11 +68,11 @@ class TournamentTeamLogicClass:
         newStartDate = datetime.strptime(newTournament.startDate, "%Y-%m-%d")
 
         # Get all tournaments this team is already registered for
-        registeredTournaments = self.DataWrapper.getTournamentsForTeam(teamName)
+        registeredTournaments = self.DataWrapper.get_tournaments_for_team(teamName)
 
         # Check for date conflicts
         for regTournamentName in registeredTournaments:
-            regTournament = self.TournamentLogic.getTournamentByName(regTournamentName)
+            regTournament = self.TournamentLogic.get_tournament_by_name(regTournamentName)
             if regTournament:
                 regStartDate = datetime.strptime(regTournament.startDate, "%Y-%m-%d")
                 regEndDate = datetime.strptime(regTournament.endDate, "%Y-%m-%d")

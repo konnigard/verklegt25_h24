@@ -6,23 +6,23 @@ class TournamentLogicClass:
     def __init__(self):
         self.DataWrapper = DataWrapper()
 
-    def grabTournamentData(self):
+    def grab_tournament_data(self):
         """ Takes the info from the Data layer and makes it available for UI """
-        readTournaments = self.DataWrapper.readTournaments()
+        readTournaments = self.DataWrapper.read_tournaments()
         return readTournaments
 
-    def saveNewTournament(self, tournament):
+    def save_new_tournament(self, tournament):
         """ Saves a new tournament to the data layer """
-        self.DataWrapper.writeTournaments(tournament)
+        self.DataWrapper.write_tournaments(tournament)
 
-    def createTournamentFromData(self, name, game, location, start_date, end_date, contact_name, contact_phone, contact_email):
+    def create_tournament_from_data(self, name, game, location, start_date, end_date, contact_name, contact_phone, contact_email):
         """ Creates a tournament object from raw data """
         tournament = Tournament(name, game, location, start_date, end_date, contact_name, contact_phone, contact_email)
         return tournament
 
-    def getTournamentByName(self, tournamentName: str) -> Tournament:
+    def get_tournament_by_name(self, tournamentName: str) -> Tournament:
         """ Returns a tournament by name or None if not found """
-        tournaments = self.DataWrapper.readTournaments()
+        tournaments = self.DataWrapper.read_tournaments()
         for tournament in tournaments:
             if tournament.name == tournamentName:
                 return tournament

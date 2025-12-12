@@ -5,11 +5,11 @@ class ClubLogicClass:
     def __init__(self):
         self.DataWrapper = DataWrapper()
 
-    def grabClubData(self):
+    def grab_club_data(self):
         """ Takes the info from the Data layer and makes it available for UI """
-        readClubs = self.DataWrapper.getClubsForLogic()
+        readClubs = self.DataWrapper.get_clubs_for_logic()
         return readClubs
 
-    def saveNewClub(self, club):
+    def save_new_club(self, club):
         """ Saves a new club to the data layer """
-        self.DataWrapper.saveClubToData(club)
+        self.DataWrapper.save_club_to_data(club)

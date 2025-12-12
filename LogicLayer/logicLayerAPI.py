@@ -15,51 +15,51 @@ class LogicWrapper:
         self.eventLogic = EventLogicClass()
         self.tournamentTeamLogic = TournamentTeamLogicClass()
 
-    def sendTeamInfoToUI(self): #Makes the teamData accessable to the UI
-        listOfTeam = self.teamLogic.grabTeamData()
+    def send_team_info_to_ui(self): #Makes the teamData accessable to the UI
+        listOfTeam = self.teamLogic.grab_team_data()
         return listOfTeam
 
-    def sendFromUItoLogic(self):
+    def send_from_ui_to_logic(self):
         from UILayer.teamUIClass import TeamUI
-        newTeam = TeamUI.createTeam()
+        newTeam = TeamUI.create_team()
         return newTeam
 
-    def sendClubInfoToUI(self): #Makes the clubData accessible to the UI
-        listOfClubs = self.clubLogic.grabClubData()
+    def send_club_info_to_ui(self): #Makes the clubData accessible to the UI
+        listOfClubs = self.clubLogic.grab_club_data()
         return listOfClubs
 
-    def saveClubFromUI(self, club):
-        self.clubLogic.saveNewClub(club)
+    def save_club_from_ui(self, club):
+        self.clubLogic.save_new_club(club)
 
     def create_player(self, player):
         """Creates a new player by saving it through the logic layer"""
-        self.playerLogic.saveNewPlayer(player)
+        self.playerLogic.save_new_player(player)
 
-    def addNewTeam(self, team):
+    def add_new_team(self, team):
         """Creates a new team by saving it through the logic layer"""
-        self.teamLogic.saveNewTeam(team)
+        self.teamLogic.save_new_team(team)
 
-    def updateTeam(self, team):
+    def update_team(self, team):
         """Updates an existing team through the logic layer"""
-        self.teamLogic.updateTeam(team)
+        self.teamLogic.update_team(team)
 
     def is_team_name_available(self, teamName: str) -> bool:
         """Checks if a team name is available (not already taken)"""
-        return self.teamLogic.isTeamNameAvailable(teamName)
+        return self.teamLogic.is_team_name_available(teamName)
 
-    def sendPlayerInfoToUI(self):
+    def send_player_info_to_ui(self):
         """Makes the player data accessible to the UI"""
-        listOfPlayers = self.playerLogic.grabPlayerData()
+        listOfPlayers = self.playerLogic.grab_player_data()
         return listOfPlayers
 
     def create_tournament(self, name, game, location, start_date, end_date, contact_name, contact_phone, contact_email):
         """Creates a new tournament by saving it through the logic layer"""
-        tournament = self.tournamentLogic.createTournamentFromData(name, game, location, start_date, end_date, contact_name, contact_phone, contact_email)
-        self.tournamentLogic.saveNewTournament(tournament)
+        tournament = self.tournamentLogic.create_tournament_from_data(name, game, location, start_date, end_date, contact_name, contact_phone, contact_email)
+        self.tournamentLogic.save_new_tournament(tournament)
 
     def get_all_tournaments(self):
         """Makes the tournament data accessible to the UI"""
-        listOfTournaments = self.tournamentLogic.grabTournamentData()
+        listOfTournaments = self.tournamentLogic.grab_tournament_data()
         return listOfTournaments
 
     def get_open_matches_for_tournament(self, tournament_id):
@@ -72,63 +72,63 @@ class LogicWrapper:
 
     def create_event(self, tournamentName, teamHome, teamAway, eventDate, eventTime, location, status="scheduled"):
         """Creates a new event by saving it through the logic layer (EventID will be auto-generated)"""
-        event = self.eventLogic.createEventFromData(tournamentName, teamHome, teamAway, eventDate, eventTime, location, status)
-        self.eventLogic.saveNewEvent(event)
+        event = self.eventLogic.create_event_from_data(tournamentName, teamHome, teamAway, eventDate, eventTime, location, status)
+        self.eventLogic.save_new_event(event)
 
     def get_all_events(self):
         """Makes the event data accessible to the UI"""
-        listOfEvents = self.eventLogic.grabEventData()
+        listOfEvents = self.eventLogic.grab_event_data()
         return listOfEvents
 
     def get_events_by_tournament(self, tournamentName: str):
         """Gets events for a specific tournament"""
-        events = self.eventLogic.grabEventsByTournament(tournamentName)
+        events = self.eventLogic.grab_events_by_tournament(tournamentName)
         return events
 
     def record_event_score(self, eventID: str, homeScore: int, awayScore: int):
         """Records the score for an event"""
-        self.eventLogic.recordEventScore(eventID, homeScore, awayScore)
+        self.eventLogic.record_event_score(eventID, homeScore, awayScore)
 
     def check_team_availability(self, teamName: str, eventDate: str, eventTime: str) -> tuple[bool, str]:
         """Checks if a team is available at the given date and time"""
-        return self.eventLogic.checkTeamAvailability(teamName, eventDate, eventTime)
+        return self.eventLogic.check_team_availability(teamName, eventDate, eventTime)
 
     def check_team_eliminated(self, teamName: str, tournamentName: str) -> tuple[bool, str]:
         """Checks if a team has been eliminated from a tournament (knockout format)"""
-        return self.eventLogic.checkTeamElimination(teamName, tournamentName)
+        return self.eventLogic.check_team_elimination(teamName, tournamentName)
 
     def get_players_by_team(self, teamName: str):
         """Gets all players for a specific team"""
-        return self.playerLogic.grabPlayersByTeam(teamName)
+        return self.playerLogic.grab_players_by_team(teamName)
 
     def is_username_available(self, username: str) -> bool:
         """Checks if a username is available (not already taken)"""
-        return self.playerLogic.isUsernameAvailable(username)
+        return self.playerLogic.is_username_available(username)
 
     def update_player(self, player):
         """Updates an existing player through the logic layer"""
-        self.playerLogic.updatePlayer(player)
+        self.playerLogic.update_player(player)
 
     def register_team_for_tournament(self, tournamentName: str, teamName: str):
         """Registers a team for a tournament"""
-        self.tournamentTeamLogic.registerTeam(tournamentName, teamName)
+        self.tournamentTeamLogic.register_team(tournamentName, teamName)
 
     def get_teams_for_tournament(self, tournamentName: str):
         """Gets all teams registered for a tournament"""
-        return self.tournamentTeamLogic.getTeamsForTournament(tournamentName)
+        return self.tournamentTeamLogic.get_teams_for_tournament(tournamentName)
 
     def get_tournaments_for_team(self, teamName: str):
         """Gets all tournaments a team is registered for"""
-        return self.tournamentTeamLogic.getTournamentsForTeam(teamName)
+        return self.tournamentTeamLogic.get_tournaments_for_team(teamName)
 
     def is_team_registered_for_tournament(self, tournamentName: str, teamName: str) -> bool:
         """Checks if a team is registered for a tournament"""
-        return self.tournamentTeamLogic.isTeamRegistered(tournamentName, teamName)
+        return self.tournamentTeamLogic.is_team_registered(tournamentName, teamName)
 
     def unregister_team_from_tournament(self, tournamentName: str, teamName: str):
         """Removes a team's registration from a tournament"""
-        self.tournamentTeamLogic.unregisterTeam(tournamentName, teamName)
+        self.tournamentTeamLogic.unregister_team(tournamentName, teamName)
 
     def has_team_tournament_date_conflict(self, tournamentName: str, teamName: str) -> bool:
         """Checks if a team has a date conflict with the specified tournament"""
-        return self.tournamentTeamLogic.hasDateConflict(tournamentName, teamName)
+        return self.tournamentTeamLogic.has_date_conflict(tournamentName, teamName)

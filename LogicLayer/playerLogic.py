@@ -5,26 +5,26 @@ class PlayerLogicClass:
     def __init__(self):
         self.DataWrapper = DataWrapper()
 
-    def grabPlayerData(self):
+    def grab_player_data(self):
         """ Takes the info from the Data layer and makes it available for UI """
-        readPlayers = self.DataWrapper.readPlayers()
+        readPlayers = self.DataWrapper.read_players()
         return readPlayers
 
-    def saveNewPlayer(self, player):
+    def save_new_player(self, player):
         """ Saves a new player to the data layer """
-        self.DataWrapper.writePlayer(player)
+        self.DataWrapper.write_player(player)
 
-    def grabPlayersByTeam(self, teamName: str):
+    def grab_players_by_team(self, teamName: str):
         """ Gets players for a specific team """
-        players = self.DataWrapper.readPlayersByTeam(teamName)
+        players = self.DataWrapper.read_players_by_team(teamName)
         return players
 
-    def isUsernameAvailable(self, username: str) -> bool:
+    def is_username_available(self, username: str) -> bool:
         """ Checks if a username is available (not already taken) """
-        all_players = self.DataWrapper.readPlayers()
+        all_players = self.DataWrapper.read_players()
         existing_usernames = [player.username.lower() for player in all_players]
         return username.lower() not in existing_usernames
 
-    def updatePlayer(self, player):
+    def update_player(self, player):
         """ Updates an existing player through the data layer """
-        self.DataWrapper.updatePlayer(player)
+        self.DataWrapper.update_player(player)
