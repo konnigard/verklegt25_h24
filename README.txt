@@ -26,3 +26,5 @@ UILayer Folder (9 .py files that all include code)
 not included but needed:
 a computer
 ################################################################################
+Login:
+The system doesn't have a login persay but if you wish to use the Captain window you'll need to know the username of the captain and which team he belongs to.
