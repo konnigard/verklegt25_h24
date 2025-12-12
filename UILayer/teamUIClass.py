@@ -174,7 +174,7 @@ class TeamUI:
             choice = input("Choose action: ").strip().lower()
 
             if choice == "1" and session.can_edit_player(team.teamName):
-                self.selectCaptain(team, players)
+                self.select_captain(team, players)
                 # Reload team from database to get updated captain information
                 teamList = self.LogicWrapper.send_team_info_to_ui()
                 team = next((t for t in teamList if t.teamID == team.teamID), team)

@@ -13,7 +13,7 @@ class PlayerData:
     def load_player(self) -> list[Player]:
         playerList = []
         try:
-            with open('DataLayer/repository/PlayersDB.csv', mode='r', encoding='utf-8') as dataBase:
+            with open('DataLayer/repository/PlayersDB.csv', mode='r', encoding='latin-1') as dataBase:
                 csvDB = csv.reader(dataBase, delimiter=';')
 
                 for info in csvDB:

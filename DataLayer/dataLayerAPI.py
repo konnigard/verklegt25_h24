@@ -80,7 +80,7 @@ class DataWrapper:
 ##############################################################
 
 ####  Functions for Events  ##################################
-    def writeEvent(self, event: Event):
+    def write_event(self, event: Event):
         """Saves an event to the CSV database"""
         return self.EventData.save_event(event)
 
