@@ -15,10 +15,10 @@ class ClubData:
         """ Reads the CSV to find all clubs """
         clubList = []
         try:
-            with open('DataLayer/repository/ClubDB.csv', mode='r') as dataBase:
-                csvDB = csv.reader(dataBase, delimiter=';')
+            with open('DataLayer/repository/ClubDB.csv', mode='r', encoding= 'utf-8') as dataBase:
+                csv_DB = csv.reader(dataBase, delimiter=';')
 
-                for info in csvDB:
+                for info in csv_DB:
                     if len(info) >= 4:
                         # Old format: clubname;teamlist;hometown;country (skip teamlist)
                         clubname = info[0]
