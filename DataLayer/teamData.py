@@ -16,7 +16,7 @@ class TeamData:
         return str(max_id + 1)
 
     def save_new_team(self, newTeam: Team):
-        # Auto-generate TeamID if not set or empty
+        """Auto-generate TeamID if not set or empty"""
         if not newTeam.teamID:
             newTeam.teamID = self._get_next_team_id()
 
@@ -68,6 +68,7 @@ class TeamData:
                     csvWriter.writerow([team.teamID, team.teamName, team.teamClub, team.captain])
 
     def checks_team_name(self):
+        """Compares the team name to see if it exists in Database and returns the resault"""
         teamNameList = []
         with open('DataLayer/repository/TeamDB.csv', mode='r') as dataBase:
             csvDB = csv.reader(dataBase, delimiter= ';')

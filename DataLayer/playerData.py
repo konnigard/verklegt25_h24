@@ -6,11 +6,13 @@ class PlayerData:
         pass
 
     def save_player(self, player: Player):
+      """Saves new player to the database"""
       with open('DataLayer/repository/PlayersDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             csvWriter.writerow([player.name, player.dob, player.address, player.phone_number, player.email, player.link, player.username, player.teamName])  
 
     def load_player(self) -> list[Player]:
+        """Reads players from the Database"""
         playerList = []
         try:
             with open('DataLayer/repository/PlayersDB.csv', mode='r', encoding='latin-1') as dataBase:

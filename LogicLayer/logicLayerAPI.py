@@ -15,20 +15,19 @@ class LogicWrapper:
         self.eventLogic = EventLogicClass()
         self.tournamentTeamLogic = TournamentTeamLogicClass()
 
-    def send_team_info_to_ui(self): #Makes the teamData accessable to the UI
+    def send_team_info_to_ui(self):
+        """Displays the team details through the logic layer"""
         listOfTeam = self.teamLogic.grab_team_data()
         return listOfTeam
 
-    def send_from_ui_to_logic(self):
-        from UILayer.teamUIClass import TeamUI
-        newTeam = TeamUI.create_team()
-        return newTeam
 
-    def send_club_info_to_ui(self): #Makes the clubData accessible to the UI
+    def send_club_info_to_ui(self): 
+        """Displayes the club details through the logic layer"""
         listOfClubs = self.clubLogic.grab_club_data()
         return listOfClubs
 
     def save_club_from_ui(self, club):
+        """Creates a new club by saving it through the logic layer"""
         self.clubLogic.save_new_club(club)
 
     def create_player(self, player):
@@ -62,13 +61,6 @@ class LogicWrapper:
         listOfTournaments = self.tournamentLogic.grab_tournament_data()
         return listOfTournaments
 
-    def get_open_matches_for_tournament(self, tournament_id):
-        """Placeholder for getting open matches - not yet implemented"""
-        return []
-
-    def record_match_result(self, match_id, tournament_id, home_score, away_score):
-        """Placeholder for recording match results - not yet implemented"""
-        print("Match result recording not yet implemented")
 
     def create_event(self, tournamentName, teamHome, teamAway, eventDate, eventTime, location, status="scheduled"):
         """Creates a new event by saving it through the logic layer (EventID will be auto-generated)"""

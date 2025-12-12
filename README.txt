@@ -17,11 +17,12 @@ What is needed to Run:
 Included:
 __main__.py
 ReadMe.txt (Hey that's me)
+Diary.md
 DataLayer Folder (8 .py files 7 of which include code and a reposetory)
 reposetory Folder (in the DataLayer Folder with 6 .cvs files that includes data for the program)
 Models Folder (6 .py files for each of the models)
 LogicLayer Folder (8 .py files 7 of which include code)
-UILayer Folder (9 .py files that all include code)
+UILayer Folder (8 .py files that all include code)
 
 not included but needed:
 a computer

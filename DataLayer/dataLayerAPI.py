@@ -26,13 +26,10 @@ class DataWrapper:
         teamList = self.TeamData.read_all_teams()
         return teamList 
 
-    def send_to_logic(self): #Takes what read_all_teams returns and sends it to logic layer
+    def send_to_logic(self):
+        """Makes team detail acceseble to the logic layer"""
         teamList = self.TeamData.read_all_teams()
         return teamList
-    
-    def Load_team_by_id(self, teamID ) -> Team:
-        t : Team = Team(teamID=teamID, teamName="smuu", teamClub="Plee")
-        return t
     
     def write_new_team(self, team: Team):
         """Saves a new team to the CSV database"""
@@ -46,12 +43,14 @@ class DataWrapper:
 
 ####  Functions for Players  ##################################
     def write_player(self, player: Player):
+        """Creates new player in Database"""
         return self.PlayerData.save_player(player)
 
     def read_players(self) -> list:
         return self.PlayerData.load_player()
 
     def read_players_by_team(self, teamName: str) -> list:
+        """Reads all the players in the team"""
         return self.PlayerData.load_players_by_team(teamName)
 
     def update_player(self, player: Player) -> bool:
@@ -62,20 +61,24 @@ class DataWrapper:
 ##############################################################
 
 ####  Functions for Clubs  ##################################
-    def get_clubs_for_logic(self): #Takes what read_clubs returns and sends it to logic layer
+    def get_clubs_for_logic(self): 
+        """Makes Club details avalible to the logic layer"""
         clubList = self.ClubData.read_clubs()
         return clubList
 
     def save_club_to_data(self, club):
+        """Creates new club in the Database"""
         self.ClubData.write_club(club)
     
 ##############################################################    
 
 ####  Functions for Tournaments  #############################
     def read_tournaments(self):
+        """Returns the details on tournamnets to logic"""
         return self.TournamentData.load_tournament()
 
     def write_tournaments(self, tournament: Tournament):
+        """Saves information on new Tournaments to Database"""
         return self.TournamentData.save_tournament(tournament)
 ##############################################################
 

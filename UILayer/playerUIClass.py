@@ -9,6 +9,7 @@ class playerUI:
         self.logic = LogicWrapper()
 
     def player_menu(self) -> None:
+        """Desplays the menu for players"""
         while True:
             print("\n===== PLAYER MENU =====")
             print("1 Register new player")

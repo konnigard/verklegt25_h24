@@ -6,6 +6,7 @@ class TournamentData:
         pass
 
     def save_tournament(self, tournament: Tournament):
+        """Saves new tournament detail to the Database"""
         with open('DataLayer/repository/TournamentDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             # teamlist is now a string, write it directly
