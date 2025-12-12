@@ -95,7 +95,7 @@ class ClubUI:
             elif choice.isdigit():
                 club_number = int(choice)
                 if 1 <= club_number <= len(clubList):
-                    self.showClubDetails(clubList[club_number - 1])
+                    self.show_club_details(clubList[club_number - 1])
                 else:
                     print(f"Invalid club number. Please choose between 1 and {len(clubList)}.")
             else:
