@@ -7,7 +7,7 @@ class EventData:
 
     def _getNextEventID(self) -> str:
         """Generates the next available EventID"""
-        events = self.loadEvents()
+        events = self.load_events()
         if not events:
             return "1"
 
@@ -15,7 +15,7 @@ class EventData:
         max_id = max(int(event.eventID) for event in events)
         return str(max_id + 1)
 
-    def saveEvent(self, event: Event):
+    def save_event(self, event: Event):
         """Saves an event to the CSV database"""
         # Auto-generate EventID if not set or empty
         if not event.eventID:
@@ -36,7 +36,7 @@ class EventData:
                 event.awayScore
             ])
 
-    def loadEvents(self) -> list[Event]:
+    def load_events(self) -> list[Event]:
         """Reads the CSV to find all events"""
         eventList = []
 
@@ -65,14 +65,14 @@ class EventData:
 
         return eventList
 
-    def loadEventsByTournament(self, tournamentName: str) -> list[Event]:
+    def load_events_by_tournament(self, tournamentName: str) -> list[Event]:
         """Reads the CSV to find events for a specific tournament"""
-        allEvents = self.loadEvents()
+        allEvents = self.load_events()
         return [event for event in allEvents if event.tournamentName == tournamentName]
 
-    def updateEventScore(self, eventID: str, homeScore: int, awayScore: int):
+    def update_event_score(self, eventID: str, homeScore: int, awayScore: int):
         """Updates the score for a specific event"""
-        events = self.loadEvents()
+        events = self.load_events()
 
         # Update the event in memory
         for event in events:
@@ -99,12 +99,12 @@ class EventData:
                     event.awayScore
                 ])
 
-    def checkTeamConflict(self, teamName: str, eventDate: str, eventTime: str) -> tuple[bool, str]:
+    def check_team_conflict(self, teamName: str, eventDate: str, eventTime: str) -> tuple[bool, str]:
         """
         Checks if a team has a conflict at the given date and time.
         Returns (has_conflict, conflict_message)
         """
-        events = self.loadEvents()
+        events = self.load_events()
 
         for event in events:
             # Skip completed events
@@ -119,12 +119,12 @@ class EventData:
 
         return (False, "")
 
-    def checkTeamEliminated(self, teamName: str, tournamentName: str) -> tuple[bool, str]:
+    def check_team_eliminated(self, teamName: str, tournamentName: str) -> tuple[bool, str]:
         """
         Checks if a team has lost a match in the tournament (knockout format).
         Returns (is_eliminated, elimination_message)
         """
-        events = self.loadEvents()
+        events = self.load_events()
 
         for event in events:
             # Only check completed events in this tournament

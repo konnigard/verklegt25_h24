@@ -5,17 +5,17 @@ class TournamentTeamData:
     def __init__(self):
         pass
 
-    def registerTeam(self, tournamentTeam: TournamentTeam) -> None:
+    def register_team(self, tournamentTeam: TournamentTeam) -> None:
         """Registers a team for a tournament (prevents duplicates)"""
         # Check if already registered
-        if self.isTeamRegistered(tournamentTeam.tournamentName, tournamentTeam.teamName):
+        if self.is_team_registered(tournamentTeam.tournamentName, tournamentTeam.teamName):
             return  # Already registered, don't add duplicate
 
         with open('DataLayer/repository/TournamentTeamDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             csvWriter.writerow([tournamentTeam.tournamentName, tournamentTeam.teamName])
 
-    def getTeamsForTournament(self, tournamentName: str) -> list[str]:
+    def get_teams_for_tournament(self, tournamentName: str) -> list[str]:
         """Returns list of team names registered for a tournament"""
         teamNames = []
         try:
@@ -29,7 +29,7 @@ class TournamentTeamData:
             pass
         return teamNames
 
-    def getTournamentsForTeam(self, teamName: str) -> list[str]:
+    def get_tournaments_for_team(self, teamName: str) -> list[str]:
         """Returns list of tournament names a team is registered for"""
         tournamentNames = []
         try:
@@ -43,7 +43,7 @@ class TournamentTeamData:
             pass
         return tournamentNames
 
-    def isTeamRegistered(self, tournamentName: str, teamName: str) -> bool:
+    def is_team_registered(self, tournamentName: str, teamName: str) -> bool:
         """Checks if a team is registered for a tournament"""
         try:
             with open('DataLayer/repository/TournamentTeamDB.csv', mode='r') as dataBase:
@@ -56,7 +56,7 @@ class TournamentTeamData:
             pass
         return False
 
-    def unregisterTeam(self, tournamentName: str, teamName: str) -> None:
+    def unregister_team(self, tournamentName: str, teamName: str) -> None:
         """Removes a team's registration from a tournament"""
         registrations = []
         try:

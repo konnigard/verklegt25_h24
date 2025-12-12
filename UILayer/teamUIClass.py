@@ -233,7 +233,7 @@ class TeamUI:
                 if idx == 0:
                     # Remove captain
                     team.captain = ""
-                    self.LogicWrapper.updateTeam(team)
+                    self.LogicWrapper.update_team(team)
                     print("\n✓ Captain removed successfully!")
                     print("✓ Changes saved to database.")
                     input("\nPress Enter to continue...")
@@ -241,7 +241,7 @@ class TeamUI:
                 elif 1 <= idx <= len(players_sorted):
                     selected_player = players_sorted[idx - 1]
                     team.captain = selected_player.username
-                    self.LogicWrapper.updateTeam(team)
+                    self.LogicWrapper.update_team(team)
                     print(f"\n✓ {selected_player.name} (@{selected_player.username}) is now the captain!")
                     print("✓ Changes saved to database.")
                     input("\nPress Enter to continue...")

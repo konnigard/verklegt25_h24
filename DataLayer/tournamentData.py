@@ -5,13 +5,13 @@ class TournamentData:
     def __init__(self):
         pass
 
-    def saveTournament(self, tournament: Tournament):
+    def save_tournament(self, tournament: Tournament):
         with open('DataLayer/repository/TournamentDB.csv', mode='a', newline='') as dataBase:
             csvWriter = csv.writer(dataBase, delimiter=';')
             # teamlist is now a string, write it directly
             csvWriter.writerow([tournament.name, tournament.game, tournament.location, tournament.startDate, tournament.endDate, tournament.contact, tournament.contactPhone, tournament.contactEmail])
 
-    def loadTournament(self) -> list[Tournament]:
+    def load_tournament(self) -> list[Tournament]:
         """Reads the CSV to find all tournaments"""
         #Creates Emptylist that gets added to in the for loop
         tourList = []
