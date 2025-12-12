@@ -270,7 +270,6 @@ Git Handbók (x)
 
 
 
-
 <h1> Dagur 6 - 1/12/2025 </h1>
 
 <h3> Mæting: </h3> 
@@ -418,7 +417,7 @@ Hægt er að lesa í skjalinu.
 
 <h3> Hvað var gert í gær? </h3>
 
-Unnið var í að geta
+Unnið var í að geta skrifað í skjalið.
 
 
 
@@ -426,19 +425,38 @@ Unnið var í að geta
 
 <h3> Mæting: </h3> 
 
+Axel
+
+Guðrún
+
+Hákon
+
 <h3> Staða verkefnis: </h3>
+
+Þurft var að láta frá sér tveimur einstaklingum í hópnum og er áhyggjur af því að ekki verður hægt að klára.
 
 <h3> Hvað var gert í gær? </h3>
 
+Unnið var í Validation
 
 
 <h1> Dagur 13 - 10/12/2025 </h1>
 
 <h3> Mæting: </h3> 
 
+Axel
+
+Guðrún
+
+Hákon
+
 <h3> Staða verkefnis: </h3>
 
+Flest allat A kröfur komnar.
+
 <h3> Hvað var gert í gær? </h3>
+
+Unnið var að fá flestar A-kröfur til staðar. 
 
 
 
@@ -446,9 +464,19 @@ Unnið var í að geta
 
 <h3> Mæting: </h3> 
 
+Axel
+
+Guðrún
+
+Hákon
+
 <h3> Staða verkefnis: </h3>
 
+Vantar nokkrar A-kröfur og þarf að klára flest fyrir utan forits
+
 <h3> Hvað var gert í gær? </h3>
+
+Farið var yfir gömlu hönnunnina og fanst gamlar A-kröfur sem vanta.
 
 
 
@@ -456,6 +484,16 @@ Unnið var í að geta
 
 <h3> Mæting: </h3> 
 
+Axel
+
+Guðrún
+
+Hákon
+
 <h3> Staða verkefnis: </h3>
 
+Allar A kröfur komnar og er byrjað að vinna á uppfærði hönnun og README
+
 <h3> Hvað var gert í gær? </h3>
+
+Klárað var A kröfur og er fullur undirbúningur að klára allt auka sem þarf.
