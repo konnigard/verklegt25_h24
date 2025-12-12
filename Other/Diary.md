@@ -101,6 +101,8 @@ Hákon tók að sér að setja upp git og búa til git handbók. Allir kláruðu
 
 Ákveðið var að ræða mættingu og annað á morgun þegar allir verða til staða í HR.
 
+
+
 <h1> Dagur 2 - 25/11/2025 </h1>
 
 <h3> Mæting: </h3> 
@@ -223,6 +225,51 @@ Git Handbók (x)
 
 
 
+<h1> Dagur 5 - 28/11/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel
+
+Guðrún
+
+Hákon
+
+Þórður
+
+Þorbjörn(Remote)
+
+
+<h3> Staða verkefnis: </h3>
+
+Loka skref hönnuninnar verið að vinna í.
+
+
+<h3> Hvað var gert í gær? </h3>
+
+Klárað Git Handbók og unnið í var að klára megnið í hönnun.
+
+
+<h3> ToDo: </h3>
+
+Kröfulisti (x)
+
+Use cases(x)
+
+Happy Paths (x) 
+
+Class diagrams ()
+
+State diagrams ()
+
+Notendagreining (x)
+
+UI-Design (x)
+
+Git Handbók (x)
+
+
+
 
 <h1> Dagur 6 - 1/12/2025 </h1>
 
@@ -269,7 +316,7 @@ Git Handbók (x)
 
 
 
-<h1> Dagur 6 - 1/12/2025 </h1>
+<h1> Dagur 7 - 2/12/2025 </h1>
 
 <h3> Mæting: </h3> 
 
@@ -307,3 +354,108 @@ Team Class ()
 Event Class ()
 
 Tournament Class ()
+
+
+
+<h1> Dagur 8 - 3/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+Axel
+
+Guðrún
+
+Hákon
+
+Þórður
+
+<h3> Staða verkefnis: </h3>
+
+Hönnun komin og byrjað er á að forrita.
+
+<h3> Hvað var gert í gær? </h3>
+Klárað þriggja laga hönnunina
+
+
+
+<h1> Dagur 9 - 4/12/2025 </h1>
+
+<h3> Mæting: </h3>
+
+Axel
+
+Þorbjörn (Remote) 
+
+<h3> Staða verkefnis: </h3>
+Hænsna skref í foritun.
+
+<h3> Hvað var gert í gær? </h3>
+Byrjað var að forita á Öllum lögum
+
+
+
+<h1> Dagur 10 - 5/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+<h3> Staða verkefnis: </h3>
+
+<h3> Hvað var gert í gær? </h3>
+
+
+
+<h1> Dagur 11 - 8/12/2025 </h1>
+
+<h3> Mæting: </h3>
+
+Guðrún
+
+Hákon
+
+<h3> Staða verkefnis: </h3>
+
+Hægt er að lesa í skjalinu.
+
+<h3> Hvað var gert í gær? </h3>
+
+Unnið var í að geta
+
+
+
+<h1> Dagur 12 - 9/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+<h3> Staða verkefnis: </h3>
+
+<h3> Hvað var gert í gær? </h3>
+
+
+
+<h1> Dagur 13 - 10/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+<h3> Staða verkefnis: </h3>
+
+<h3> Hvað var gert í gær? </h3>
+
+
+
+<h1> Dagur 14 - 11/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+<h3> Staða verkefnis: </h3>
+
+<h3> Hvað var gert í gær? </h3>
+
+
+
+<h1> Dagur 15 - 12/12/2025 </h1>
+
+<h3> Mæting: </h3> 
+
+<h3> Staða verkefnis: </h3>
+
+<h3> Hvað var gert í gær? </h3>
